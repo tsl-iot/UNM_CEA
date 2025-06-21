@@ -1,0 +1,374 @@
+/* 
+ * Project: Controlled Environment Agriculture Base Station
+ * Author: Edward Ishman
+ * Date: 04/21/2025
+ * For comprehensive documentation and examples, please visit:
+ * https://docs.particle.io/firmware/best-practices/firmware-template/
+ */
+
+// Include Particle Device OS APIs
+#include "Particle.h"
+#include <Adafruit_MQTT.h>
+#include "Adafruit_MQTT/Adafruit_MQTT.h" 
+#include "Adafruit_MQTT/Adafruit_MQTT_SPARK.h" 
+#include <UNM_CEA_Credentials.h>
+
+// Let Device OS manage the connection to the Particle Cloud
+SYSTEM_MODE(SEMI_AUTOMATIC);
+
+// MQTT Broker and Feeds
+TCPClient TheClient; 
+Adafruit_MQTT_SPARK mqtt(&TheClient,AIO_SERVER,AIO_SERVERPORT,AIO_USERNAME,AIO_KEY);
+
+// BLE Service UUID's -- Imitates UART communication (RX - TX)
+void onDataReceived(const uint8_t *data, size_t len, const BlePeerDevice &peer, void *context);
+const BleUuid serviceUuid("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
+const BleUuid rxUuid("6E400002-B5A3-F393-E0A9-E50E24DCCA9E");
+const BleUuid txUuid("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
+
+// BLE Objects
+BlePeerDevice peer;
+BleCharacteristic peerTxCharacteristic;
+BleCharacteristic rxCharacteristic ("rx",BleCharacteristicProperty::WRITE_WO_RSP,rxUuid,serviceUuid,onDataReceived,NULL);
+
+// Watchdog
+ApplicationWatchdog *wd;
+
+
+// Structs
+struct Devices{
+  float tempF;
+  int humidity;
+  float pressure;
+
+  int lightColorReadings[8];
+};
+Devices device_1;
+Devices device_2;
+Devices device_3;
+Devices device_4;
+Devices device_5;
+Devices device_6;
+Devices device_7;
+Devices device_8;
+Devices device_9;
+Devices device_10;
+Devices device_11;
+Devices device_12;
+
+
+//Functions
+void bleConnect();
+void MQTT_connect();
+void pingBroker();
+uint64_t millis64bit();
+void watchdogHandler();
+void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID);
+// void connectToNetwork();
+// void getWiFi();
+
+void setup() {
+  Serial.begin(9600);
+  waitFor(Serial.isConnected,2500);
+  //getWiFi();
+  //connectToNetwork();
+  BLE.on();
+  peerTxCharacteristic.onDataReceived(onDataReceived, &peerTxCharacteristic);
+  BLE.setTxPower(8);
+  Serial.printf("M-SOM BLE Address: %s\n",BLE.address().toString().c_str());
+  //wd = new ApplicationWatchdog(180000, watchdogHandler, 1536);
+  pinMode(D7,OUTPUT);
+  digitalWrite(D7, LOW);
+  delay(2000);
+}
+
+void loop() {
+  //MQTT_connect();
+  //pingBroker();
+
+  while(peer.connected()){
+    digitalWrite(D7, HIGH); 
+    peer.getCharacteristicByUUID(peerTxCharacteristic, txUuid); // Get peer device and TX characteristics.
+
+  }
+  if(!peer.connected()){
+    digitalWrite(D7, LOW);
+    bleConnect();
+  }
+  
+    
+  
+  
+ 
+}
+
+// Scan BLE devices then connect to the appropriate one
+void bleConnect(){
+  static int deviceCount;
+  String _deviceName;
+  BleAdvertisingData advData;
+  BleScanFilter filter;
+  filter.serviceUUID(txUuid);
+
+  // start scanning for devices advertising TxUUID
+  Vector<BleScanResult> scanResults =  BLE.scanWithFilter(filter); 
+  if(scanResults.size()){
+    Serial.printf("%i devices found\n", scanResults.size());
+    for(int ii = 0; ii < scanResults.size(); ii++){
+      String name = scanResults[ii].advertisingData().deviceName();
+      for(int i = 0; i < 13; i++){
+        if(name == String(deviceCount)){
+          //Serial.printf("scan count = %i\n", deviceCount);
+          deviceCount++;
+          peer = BLE.connect(scanResults[ii].address());
+          return;
+        }
+        else{
+          deviceCount++;
+        }
+        if(deviceCount == 12){
+          deviceCount = 0;
+        }
+      }
+    }
+  }
+}
+      
+
+void watchdogHandler(){
+  System.reset(RESET_NO_WAIT);
+}
+
+void MQTT_connect() {
+  int8_t ret;
+  if (mqtt.connected()) {
+    
+    return;
+  }
+  Serial.print("Connecting to MQTT... ");
+  while ((ret = mqtt.connect()) != 0) { // connect will return 0 for connected
+    Serial.printf("%s\n",(char *)mqtt.connectErrorString(ret));
+    Serial.printf("Retrying MQTT connection in 5 seconds..\n");
+    mqtt.disconnect();
+    delay(5000);  // wait 5 seconds
+  }
+  Serial.printf("MQTT Connected!\n");
+  }
+
+void pingBroker(){
+  static uint64_t last = millis64bit();
+  if ((millis()-last)>120000) {
+    Serial.printf("Pinging MQTT \n");
+    if(! mqtt.ping()) {
+      Serial.printf("Disconnecting \n");
+      mqtt.disconnect();
+    }
+      last = millis();
+  }
+}
+
+uint64_t millis64bit() {
+    static uint32_t low4bytes, high4bytes;
+    uint32_t newMillis;
+
+    newMillis = millis();
+    if (newMillis < low4bytes) {    //check if millis has rolled over
+       high4bytes++;                //if so, add one to high bytes
+    }
+    low4bytes = newMillis;
+    return (high4bytes << 32 | low4bytes); //return 64-bit (8-byte) millis
+}
+
+void onDataReceived(const uint8_t *data, size_t len, const BlePeerDevice &peer, void *context){
+  
+
+  //Serial.printf("Received data from :%02X :%02X :%02X :%02X :%02X :%02X\n", peer.address()[0], peer.address()[1], peer.address()[2], peer.address()[3], peer.address()[4], peer.address()[5]);
+  if(peer.address()[0] == 0xC8){
+    parseIncomingData(data, device_1, 1);
+  }
+  if(peer.address()[0] == 0x2D){
+    parseIncomingData(data, device_2, 2);
+  }
+  if(peer.address()[0] == 0xAC){
+    parseIncomingData(data, device_3, 3);
+  }
+  if(peer.address()[0] == 0x00){
+    parseIncomingData(data, device_4, 4);
+  }
+  if(peer.address()[0] == 0x00){
+    parseIncomingData(data, device_5, 5);
+  }
+  if(peer.address()[0] == 0x00){
+    parseIncomingData(data, device_6, 6);
+  }
+  if(peer.address()[0] == 0x00){
+    parseIncomingData(data, device_7, 7);
+  }
+  if(peer.address()[0] == 0x00){
+    parseIncomingData(data, device_8, 8);
+  }
+  if(peer.address()[0] == 0x00){
+    parseIncomingData(data, device_9, 9);
+  }
+  if(peer.address()[0] == 0x00){
+    parseIncomingData(data, device_10, 10);
+  }
+  if(peer.address()[0] == 0x00){
+    parseIncomingData(data, device_11, 11);
+  }
+  if(peer.address()[0] == 0x00){
+    parseIncomingData(data, device_12, 12);
+  }
+}
+
+
+void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID){
+
+  String incomingMessage;
+  int newDelimiter;
+  incomingMessage = (String)(char *)data;
+  // Serial.printf("%s\n", incomingMessage.c_str());
+
+  // Parse Temperature
+  newDelimiter = incomingMessage.indexOf(':');
+  //Serial.printf("%i\n", newDelimiter);
+  String temperature = incomingMessage.substring(0,newDelimiter);
+  incomingMessage.remove(0,newDelimiter+1);
+  deviceNum.tempF = atof(temperature.c_str());
+
+  // Parse humidity
+  newDelimiter = incomingMessage.indexOf(':');
+  //Serial.printf("%i\n", newDelimiter);
+  String humidity = incomingMessage.substring(0,newDelimiter);
+  incomingMessage.remove(0,newDelimiter+1);
+  deviceNum.humidity = atoi(humidity.c_str());
+
+  // Parse barometric pressure
+  newDelimiter = incomingMessage.indexOf(':');
+  //Serial.printf("%i\n", newDelimiter);
+  String pressure = incomingMessage.substring(0,newDelimiter);
+  incomingMessage.remove(0,newDelimiter+1);
+  deviceNum.pressure = atof(pressure.c_str());
+
+  // Parse 415 wavelength
+  newDelimiter = incomingMessage.indexOf(':');
+  //Serial.printf("%i\n", newDelimiter);
+  String nm415 = incomingMessage.substring(0, newDelimiter);
+  incomingMessage.remove(0,newDelimiter+1);
+  deviceNum.lightColorReadings[0] = atoi(nm415.c_str());
+
+  // Parse 445 wavelength
+  newDelimiter = incomingMessage.indexOf(':');
+  //Serial.printf("%i\n", newDelimiter);
+  String nm445 = incomingMessage.substring(0, newDelimiter);
+  incomingMessage.remove(0,newDelimiter+1);
+  deviceNum.lightColorReadings[1] = atoi(nm445.c_str());
+
+  // Parse 480 wavelength
+  newDelimiter = incomingMessage.indexOf(':');
+  //Serial.printf("%i\n", newDelimiter);
+  String nm480 = incomingMessage.substring(0, newDelimiter);
+  incomingMessage.remove(0,newDelimiter+1);
+  deviceNum.lightColorReadings[2] = atoi(nm480.c_str());
+
+  // Parse 515 wavelength
+  newDelimiter = incomingMessage.indexOf(':');
+  //Serial.printf("%i\n", newDelimiter);
+  String nm515 = incomingMessage.substring(0, newDelimiter);
+  incomingMessage.remove(0,newDelimiter+1);
+  deviceNum.lightColorReadings[3] = atoi(nm515.c_str());
+
+  // Parse 555 wavelength
+  newDelimiter = incomingMessage.indexOf(':');
+  //Serial.printf("%i\n", newDelimiter);
+  String nm555 = incomingMessage.substring(0, newDelimiter);
+  incomingMessage.remove(0,newDelimiter+1);
+  deviceNum.lightColorReadings[4] = atoi(nm555.c_str());
+
+  // Parse 590 wavelength
+  newDelimiter = incomingMessage.indexOf(':');
+  //Serial.printf("%i\n", newDelimiter);
+  String nm590 = incomingMessage.substring(0, newDelimiter);
+  incomingMessage.remove(0,newDelimiter+1);
+  deviceNum.lightColorReadings[5] = atoi(nm590.c_str());
+
+  // Parse 630 wavelength
+  newDelimiter = incomingMessage.indexOf(':');
+  //Serial.printf("%i\n", newDelimiter);
+  String nm630 = incomingMessage.substring(0, newDelimiter);
+  incomingMessage.remove(0,newDelimiter+1);
+  deviceNum.lightColorReadings[6] = atoi(nm630.c_str());
+
+  // Parse 680 wavelength
+  newDelimiter = incomingMessage.indexOf(':');
+  //Serial.printf("%i\n", newDelimiter);
+  String nm680 = incomingMessage.substring(0, newDelimiter);
+  //incomingMessage.remove(0,newDelimiter);
+  deviceNum.lightColorReadings[7] = atoi(nm680.c_str());
+
+  Serial.printf("Readings from device ID: %i\nTemperature: %i\nHumidity %0.1f\nBarometric pressure: %0.1f inHg\n415 Wavelength: %i\n445 Wavelength: %i\n480 Wavelength: %i\n515 Wavelength: %i\n555 Wavelength: %i\n590 Wavelength: %i\n630 Wavelength: %i\n680 Wavelength: %i\n", deviceID, deviceNum.tempF ,deviceNum.humidity, deviceNum.pressure, deviceNum.lightColorReadings[0], deviceNum.lightColorReadings[1], deviceNum.lightColorReadings[2], deviceNum.lightColorReadings[3], deviceNum.lightColorReadings[4], deviceNum.lightColorReadings[5], deviceNum.lightColorReadings[6], deviceNum.lightColorReadings[7]);
+}
+
+// void connectToNetwork(){
+//   unsigned int lastConnect = 0;
+
+//   WiFi.on();
+//   WiFi.connect();
+//   while(WiFi.connecting() && ((millis() - lastConnect) < 60000)) {
+//     Serial.printf(".");
+//     delay(100);
+//   }
+//   if(WiFi.ready()){
+//     Serial.printf("Connected to WiFi!\n");
+//   }
+//   else{
+//     Serial.printf("Couldn't connected to WiFi\n");
+//     Cellular.on();
+//     Cellular.connect();
+//     lastConnect = millis();
+//   }
+//   while(Cellular.connecting() && ((millis() - lastConnect) < 60000)){
+//     Serial.printf("x");
+//     delay(100);
+//   }
+//   if(Cellular.ready()){
+//     Serial.printf("Connected to Cellular!\n");
+//   }
+//   else{
+//     Serial.printf("Couldn't connected to Cellular\n");
+//   }
+  
+
+//   // while(WiFi.connecting() && ((millis() - lastConnect) < 60000)){
+//   //   Serial.printf(".");
+//   // }
+//   // if(!WiFi.ready()){
+//   //   WiFi.disconnect();
+//   //   WiFi.off();
+//   //   Cellular.on();
+//   //   Cellular.connect();
+//   //   Serial.printf("Couldn't connect to WiFi\n");
+//   // }
+//   // else{
+//   //   Serial.printf("Connected to WiFi!\n");
+//   //   Particle.connect();
+//   // }
+//   // while(!WiFi.ready() && ((millis() - lastConnect) < 60000) && Cellular.connecting()){
+//   //   Serial.printf("x");
+//   // }
+//   // if(!Cellular.ready()){
+//   //   Cellular.disconnect();
+//   //   Cellular.off();
+//   //   Serial.printf("Couldn't connect to Cellular\n");
+//   // }
+//   // else{
+//   //   Serial.printf("Connected to Cellular!\n");
+//   // }
+//   // if(!WiFi.ready() && !Cellular.ready()){
+//   //   Serial.printf("Couldn't connect to WiFi or Cellular network\n");
+//   //   //connectToNetwork();
+//   // }
+// }
+
+
+// }

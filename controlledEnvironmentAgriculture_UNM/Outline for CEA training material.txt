@@ -1,0 +1,53 @@
+Intro - E.j.
+
+Hardware Overview - Sophia
+	Particle device specs
+	sensors & components, 
+	wiring diagram
+	schematics
+
+Software Overview - Sophia
+Brief overview of 
+	VScode IDE 
+	Particle workbench
+	NodeRed
+	
+	
+
+How do different systems & devices communicate? - E.J. 
+	
+		SPI
+		UART
+		I2C
+		BLE - different versions - capabilities/limitations
+		MQTT
+
+
+Things to consider when choosing solar as a power source - E.J. &Sophia
+	Panel power ratings
+	Understanding battery Capacity
+	Understanding power consumption
+	Battery conservation i.e. sleep mode
+	Matching the panel with the charge controller
+	
+
+
+Assembly/Setup Instructions - E.J. &Sophia
+	
+	Turning on the base station
+	Wiring peripheral device
+	Ideal mounting location
+
+Instructions for viewing data on Node-Red - E.J. & Sophia
+	
+	logging into IP address with credentials
+	Selecting and configuring Nodes
+	Viewing data in debug window
+	Setting up Google Form, Google Sheet, and HTTP nodes 
+	Creating a Node-Red dashboard 	
+
+Troubleshooting guide, Documentation, Datasheets, Additional Resources
+	
+
+
+
