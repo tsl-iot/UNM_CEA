@@ -26,26 +26,26 @@ BleAdvertisingData data;
 
 const int outgoingMessageSize = 100;
 uint8_t outgoingMessage[outgoingMessageSize];
+unsigned int lastRead;
 
 
 
 
-
-// struct enviroSensors{
-//   float tempF;
-//   int humidity;
-//   float baroPressure;
-//   uint16_t readings[12];
-//   float counts[12];
-// };
-// enviroSensors enviroData;
+struct enviroSensors{
+  float tempF;
+  int humidity;
+  float baroPressure;
+  uint16_t readings[12];
+  float counts[12];
+};
+enviroSensors enviroData;
 
 Adafruit_BME280 bme;
 Adafruit_AS7341 as7341;
 
 
-// void getBME(enviroSensors bmeData);
-// void getAS7341(enviroSensors as7341Data);
+void getBME(enviroSensors bmeData);
+void getAS7341(enviroSensors as7341Data);
 
 
 
@@ -60,7 +60,7 @@ void setup() {
   BLE.on();
   BLE.addCharacteristic(txCharacteristic);
   data.appendServiceUUID(txUuid);
-  data.appendLocalName("1");
+  data.appendLocalName("12");
   BLE.advertise(&data);
   BLE.setTxPower(8);
   pinMode(D7, OUTPUT);
@@ -80,7 +80,7 @@ void setup() {
     Serial.printf("successfully started AS7341\n");
   }
 
-  Serial.printf("Argon BLE Address: %s\n",BLE.address().toString().c_str());
+  Serial.printf("Photon2 BLE Address: %s\n",BLE.address().toString().c_str());
   delay(5000);
   as7341.setATIME(100);
   as7341.setASTEP(999);
@@ -94,12 +94,16 @@ void loop() {
   }
   else{
     digitalWrite(D7, LOW);
+    if((millis() - lastRead) > 5000){
+      lastRead = millis();
+      getBME(enviroData);
+      getAS7341(enviroData);
+    }
   }
 }
 
 void sendThenDisconnect(){
-  // getBME(enviroData);
-  // getAS7341(enviroData);
+ 
   float tempF;
   int humidity;
   float baroPressure;
@@ -108,7 +112,7 @@ void sendThenDisconnect(){
 
   if (!as7341.readAllChannels(readings)){
     Serial.printf("Error reading all channels!\n");
-    return;
+    //return;
   }
 
   for(uint8_t i = 0; i < 12; i++) {
@@ -133,26 +137,25 @@ void sendThenDisconnect(){
   snprintf((char *)outgoingMessage, outgoingMessageSize, "%0.1f:%i:%0.2f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:\n", tempF, humidity, baroPressure, counts[0], counts[1], counts[2], counts[3], counts[6], counts[7], counts[8], counts[9]);
   txCharacteristic.setValue(outgoingMessage, outgoingMessageSize);
   Serial.printf("%0.1f:%i:%0.2f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:\n", tempF, humidity, baroPressure, counts[0], counts[1], counts[2], counts[3], counts[6], counts[7], counts[8], counts[9]);
-  delay(45000);
+  BLE.disconnect();
   SystemSleepConfiguration config;
   config.mode(SystemSleepMode::STOP).duration(30000);
   SystemSleepResult result = System.sleep(config);
   if(result.wakeupReason() == SystemSleepWakeupReason::BY_RTC){
-    BLE.disconnect();
     delay(30000);
-      }
+  }
   // BLE.off();
   // delay(30000);
   // BLE.on();
   // delay(15000);
     }
 
-// void getBME(enviroSensors bmeData){
-//   bmeData.tempF = (bme.readTemperature() * (9.0/5.0)) + 32.0;
-//   bmeData.humidity = (int)bme.readHumidity();
-//   bmeData.baroPressure = (bme.readPressure() / 3386.39) + 5;
-//   Serial.printf("Temp: %0.1f\nHumidity: %i\nBarometric Pressure: %0.2f\n", bmeData.tempF, bmeData.humidity, bmeData.baroPressure);
-// }
+void getBME(enviroSensors bmeData){
+  bmeData.tempF = (bme.readTemperature() * (9.0/5.0)) + 32.0;
+  bmeData.humidity = (int)bme.readHumidity();
+  bmeData.baroPressure = (bme.readPressure() / 3386.39) + 5;
+  Serial.printf("Temp: %0.1f\nHumidity: %i\nBarometric Pressure: %0.2f\n", bmeData.tempF, bmeData.humidity, bmeData.baroPressure);
+}
 
 
 
@@ -165,20 +168,20 @@ void sendThenDisconnect(){
 
 
 
-// void getAS7341(enviroSensors bmeData){
-//   if (!as7341.readAllChannels(bmeData.readings)){
-//     Serial.printf("Error reading all channels!\n");
-//     return;
-//   }
+void getAS7341(enviroSensors bmeData){
+  if (!as7341.readAllChannels(bmeData.readings)){
+    Serial.printf("Error reading all channels!\n");
+    //return;
+  }
 
-//   for(uint8_t i = 0; i < 12; i++) {
-//     if(i == 4 || i == 5){
-//       continue;
-//     }
-//     // we skip the first set of duplicate clear/NIR readings
-//     // (indices 4 and 5)
-//     bmeData.counts[i] = as7341.toBasicCounts(bmeData.readings[i]);
-//   }
-//   Serial.printf("%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f\n", bmeData.counts[0], bmeData.counts[1], bmeData.counts[2], bmeData.counts[3], bmeData.counts[6], bmeData.counts[7], bmeData.counts[8], bmeData.counts[9]);
-// }
+  for(uint8_t i = 0; i < 12; i++) {
+    if(i == 4 || i == 5){
+      continue;
+    }
+    // we skip the first set of duplicate clear/NIR readings
+    // (indices 4 and 5)
+    bmeData.counts[i] = as7341.toBasicCounts(bmeData.readings[i]);
+  }
+  Serial.printf("%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f\n", bmeData.counts[0], bmeData.counts[1], bmeData.counts[2], bmeData.counts[3], bmeData.counts[6], bmeData.counts[7], bmeData.counts[8], bmeData.counts[9]);
+}
 

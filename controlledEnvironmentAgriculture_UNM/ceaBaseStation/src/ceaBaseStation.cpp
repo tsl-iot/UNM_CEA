@@ -30,7 +30,7 @@ Adafruit_MQTT_Publish nm445Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x01"
 Adafruit_MQTT_Publish nm480Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x01");
 Adafruit_MQTT_Publish nm515Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x01");
 Adafruit_MQTT_Publish nm555Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x01");
-Adafruit_MQTT_Publish nm615Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x01");
+Adafruit_MQTT_Publish nm615Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x01");
 Adafruit_MQTT_Publish nm630Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x01");
 Adafruit_MQTT_Publish nm680Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x01");
 Adafruit_MQTT_Publish deviceNumberFeed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber");
@@ -43,129 +43,129 @@ Adafruit_MQTT_Publish nm445Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x02"
 Adafruit_MQTT_Publish nm480Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x02");
 Adafruit_MQTT_Publish nm515Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x02");
 Adafruit_MQTT_Publish nm555Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02");
-Adafruit_MQTT_Publish nm615Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x02");
+Adafruit_MQTT_Publish nm615Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x02");
 Adafruit_MQTT_Publish nm630Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
 Adafruit_MQTT_Publish nm680Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
 
-Adafruit_MQTT_Publish tempFeed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x02");
-Adafruit_MQTT_Publish humidityFeed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x02");
-Adafruit_MQTT_Publish pressureFeed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x02");
-Adafruit_MQTT_Publish nm415Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x02");
-Adafruit_MQTT_Publish nm445Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x02");
-Adafruit_MQTT_Publish nm480Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x02");
-Adafruit_MQTT_Publish nm515Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x02");
-Adafruit_MQTT_Publish nm555Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02");
-Adafruit_MQTT_Publish nm615Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x02");
-Adafruit_MQTT_Publish nm630Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
-Adafruit_MQTT_Publish nm680Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
+Adafruit_MQTT_Publish tempFeed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x03");
+Adafruit_MQTT_Publish humidityFeed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x03");
+Adafruit_MQTT_Publish pressureFeed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x03");
+Adafruit_MQTT_Publish nm415Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x03");
+Adafruit_MQTT_Publish nm445Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x03");
+Adafruit_MQTT_Publish nm480Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x03");
+Adafruit_MQTT_Publish nm515Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x03");
+Adafruit_MQTT_Publish nm555Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x03");
+Adafruit_MQTT_Publish nm615Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x03");
+Adafruit_MQTT_Publish nm630Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x03");
+Adafruit_MQTT_Publish nm680Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x03");
 
-Adafruit_MQTT_Publish tempFeed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x02");
-Adafruit_MQTT_Publish humidityFeed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x02");
-Adafruit_MQTT_Publish pressureFeed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x02");
-Adafruit_MQTT_Publish nm415Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x02");
-Adafruit_MQTT_Publish nm445Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x02");
-Adafruit_MQTT_Publish nm480Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x02");
-Adafruit_MQTT_Publish nm515Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x02");
-Adafruit_MQTT_Publish nm555Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02");
-Adafruit_MQTT_Publish nm615Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x02");
-Adafruit_MQTT_Publish nm630Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
-Adafruit_MQTT_Publish nm680Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
+Adafruit_MQTT_Publish tempFeed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x04");
+Adafruit_MQTT_Publish humidityFeed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x04");
+Adafruit_MQTT_Publish pressureFeed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x04");
+Adafruit_MQTT_Publish nm415Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x04");
+Adafruit_MQTT_Publish nm445Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x04");
+Adafruit_MQTT_Publish nm480Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x04");
+Adafruit_MQTT_Publish nm515Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x04");
+Adafruit_MQTT_Publish nm555Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x04");
+Adafruit_MQTT_Publish nm615Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x04");
+Adafruit_MQTT_Publish nm630Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x04");
+Adafruit_MQTT_Publish nm680Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x04");
 
-Adafruit_MQTT_Publish tempFeed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x02");
-Adafruit_MQTT_Publish humidityFeed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x02");
-Adafruit_MQTT_Publish pressureFeed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x02");
-Adafruit_MQTT_Publish nm415Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x02");
-Adafruit_MQTT_Publish nm445Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x02");
-Adafruit_MQTT_Publish nm480Feed_5= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x02");
-Adafruit_MQTT_Publish nm515Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x02");
-Adafruit_MQTT_Publish nm555Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02");
-Adafruit_MQTT_Publish nm615Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x02");
-Adafruit_MQTT_Publish nm630Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
-Adafruit_MQTT_Publish nm680Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
+Adafruit_MQTT_Publish tempFeed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x05");
+Adafruit_MQTT_Publish humidityFeed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x05");
+Adafruit_MQTT_Publish pressureFeed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x05");
+Adafruit_MQTT_Publish nm415Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x05");
+Adafruit_MQTT_Publish nm445Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x05");
+Adafruit_MQTT_Publish nm480Feed_5= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x05");
+Adafruit_MQTT_Publish nm515Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x05");
+Adafruit_MQTT_Publish nm555Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x05");
+Adafruit_MQTT_Publish nm615Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x05");
+Adafruit_MQTT_Publish nm630Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x05");
+Adafruit_MQTT_Publish nm680Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x05");
 
-Adafruit_MQTT_Publish tempFeed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x02");
-Adafruit_MQTT_Publish humidityFeed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x02");
-Adafruit_MQTT_Publish pressureFeed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x02");
-Adafruit_MQTT_Publish nm415Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x02");
-Adafruit_MQTT_Publish nm445Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x02");
-Adafruit_MQTT_Publish nm480Feed_6= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x02");
-Adafruit_MQTT_Publish nm515Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x02");
-Adafruit_MQTT_Publish nm555Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02");
-Adafruit_MQTT_Publish nm615Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x02");
-Adafruit_MQTT_Publish nm630Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
-Adafruit_MQTT_Publish nm680Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
+Adafruit_MQTT_Publish tempFeed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x06");
+Adafruit_MQTT_Publish humidityFeed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x06");
+Adafruit_MQTT_Publish pressureFeed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x06");
+Adafruit_MQTT_Publish nm415Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x06");
+Adafruit_MQTT_Publish nm445Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x06");
+Adafruit_MQTT_Publish nm480Feed_6= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x06");
+Adafruit_MQTT_Publish nm515Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x06");
+Adafruit_MQTT_Publish nm555Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x06");
+Adafruit_MQTT_Publish nm615Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x06");
+Adafruit_MQTT_Publish nm630Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x06");
+Adafruit_MQTT_Publish nm680Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x06");
 
-Adafruit_MQTT_Publish tempFeed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x02");
-Adafruit_MQTT_Publish humidityFeed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x02");
-Adafruit_MQTT_Publish pressureFeed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x02");
-Adafruit_MQTT_Publish nm415Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x02");
-Adafruit_MQTT_Publish nm445Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x02");
-Adafruit_MQTT_Publish nm480Feed_7= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x02");
-Adafruit_MQTT_Publish nm515Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x02");
-Adafruit_MQTT_Publish nm555Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02");
-Adafruit_MQTT_Publish nm615Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x02");
-Adafruit_MQTT_Publish nm630Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
-Adafruit_MQTT_Publish nm680Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
+Adafruit_MQTT_Publish tempFeed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x07");
+Adafruit_MQTT_Publish humidityFeed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x07");
+Adafruit_MQTT_Publish pressureFeed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x07");
+Adafruit_MQTT_Publish nm415Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x07");
+Adafruit_MQTT_Publish nm445Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x07");
+Adafruit_MQTT_Publish nm480Feed_7= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x07");
+Adafruit_MQTT_Publish nm515Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x07");
+Adafruit_MQTT_Publish nm555Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x07");
+Adafruit_MQTT_Publish nm615Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x07");
+Adafruit_MQTT_Publish nm630Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x07");
+Adafruit_MQTT_Publish nm680Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x07");
 
-Adafruit_MQTT_Publish tempFeed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x02");
-Adafruit_MQTT_Publish humidityFeed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x02");
-Adafruit_MQTT_Publish pressureFeed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x02");
-Adafruit_MQTT_Publish nm415Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x02");
-Adafruit_MQTT_Publish nm445Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x02");
-Adafruit_MQTT_Publish nm480Feed_8= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x02");
-Adafruit_MQTT_Publish nm515Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x02");
-Adafruit_MQTT_Publish nm555Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02");
-Adafruit_MQTT_Publish nm615Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x02");
-Adafruit_MQTT_Publish nm630Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
-Adafruit_MQTT_Publish nm680Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
+Adafruit_MQTT_Publish tempFeed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x08");
+Adafruit_MQTT_Publish humidityFeed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x08");
+Adafruit_MQTT_Publish pressureFeed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x08");
+Adafruit_MQTT_Publish nm415Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x08");
+Adafruit_MQTT_Publish nm445Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x08");
+Adafruit_MQTT_Publish nm480Feed_8= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x08");
+Adafruit_MQTT_Publish nm515Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x08");
+Adafruit_MQTT_Publish nm555Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x08");
+Adafruit_MQTT_Publish nm615Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x08");
+Adafruit_MQTT_Publish nm630Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x08");
+Adafruit_MQTT_Publish nm680Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x08");
 
-Adafruit_MQTT_Publish tempFeed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x02");
-Adafruit_MQTT_Publish humidityFeed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x02");
-Adafruit_MQTT_Publish pressureFeed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x02");
-Adafruit_MQTT_Publish nm415Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x02");
-Adafruit_MQTT_Publish nm445Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x02");
-Adafruit_MQTT_Publish nm480Feed_9= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x02");
-Adafruit_MQTT_Publish nm515Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x02");
-Adafruit_MQTT_Publish nm555Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02");
-Adafruit_MQTT_Publish nm615Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x02");
-Adafruit_MQTT_Publish nm630Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
-Adafruit_MQTT_Publish nm680Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
+Adafruit_MQTT_Publish tempFeed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x09");
+Adafruit_MQTT_Publish humidityFeed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x09");
+Adafruit_MQTT_Publish pressureFeed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x09");
+Adafruit_MQTT_Publish nm415Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x09");
+Adafruit_MQTT_Publish nm445Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x09");
+Adafruit_MQTT_Publish nm480Feed_9= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x09");
+Adafruit_MQTT_Publish nm515Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x09");
+Adafruit_MQTT_Publish nm555Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x09");
+Adafruit_MQTT_Publish nm615Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x09");
+Adafruit_MQTT_Publish nm630Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x09");
+Adafruit_MQTT_Publish nm680Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x09");
 
-Adafruit_MQTT_Publish tempFeed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x02");
-Adafruit_MQTT_Publish humidityFeed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x02");
-Adafruit_MQTT_Publish pressureFeed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x02");
-Adafruit_MQTT_Publish nm415Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x02");
-Adafruit_MQTT_Publish nm445Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x02");
-Adafruit_MQTT_Publish nm480Feed_10= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x02");
-Adafruit_MQTT_Publish nm515Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x02");
-Adafruit_MQTT_Publish nm555Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02");
-Adafruit_MQTT_Publish nm615Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x02");
-Adafruit_MQTT_Publish nm630Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
-Adafruit_MQTT_Publish nm680Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
+Adafruit_MQTT_Publish tempFeed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x10");
+Adafruit_MQTT_Publish humidityFeed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x10");
+Adafruit_MQTT_Publish pressureFeed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x10");
+Adafruit_MQTT_Publish nm415Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x10");
+Adafruit_MQTT_Publish nm445Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x10");
+Adafruit_MQTT_Publish nm480Feed_10= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x10");
+Adafruit_MQTT_Publish nm515Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x10");
+Adafruit_MQTT_Publish nm555Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x10");
+Adafruit_MQTT_Publish nm615Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x10");
+Adafruit_MQTT_Publish nm630Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x10");
+Adafruit_MQTT_Publish nm680Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x10");
 
-Adafruit_MQTT_Publish tempFeed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x02");
-Adafruit_MQTT_Publish humidityFeed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x02");
-Adafruit_MQTT_Publish pressureFeed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x02");
-Adafruit_MQTT_Publish nm415Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x02");
-Adafruit_MQTT_Publish nm445Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x02");
-Adafruit_MQTT_Publish nm480Feed_11= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x02");
-Adafruit_MQTT_Publish nm515Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x02");
-Adafruit_MQTT_Publish nm555Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02");
-Adafruit_MQTT_Publish nm615Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x02");
-Adafruit_MQTT_Publish nm630Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
-Adafruit_MQTT_Publish nm680Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
+Adafruit_MQTT_Publish tempFeed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x11");
+Adafruit_MQTT_Publish humidityFeed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x11");
+Adafruit_MQTT_Publish pressureFeed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x11");
+Adafruit_MQTT_Publish nm415Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x11");
+Adafruit_MQTT_Publish nm445Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x11");
+Adafruit_MQTT_Publish nm480Feed_11= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x11");
+Adafruit_MQTT_Publish nm515Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x11");
+Adafruit_MQTT_Publish nm555Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x11");
+Adafruit_MQTT_Publish nm615Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x11");
+Adafruit_MQTT_Publish nm630Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x11");
+Adafruit_MQTT_Publish nm680Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x11");
 
-Adafruit_MQTT_Publish tempFeed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x02");
-Adafruit_MQTT_Publish humidityFeed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x02");
-Adafruit_MQTT_Publish pressureFeed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x02");
-Adafruit_MQTT_Publish nm415Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x02");
-Adafruit_MQTT_Publish nm445Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x02");
-Adafruit_MQTT_Publish nm480Feed_12= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x02");
-Adafruit_MQTT_Publish nm515Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x02");
-Adafruit_MQTT_Publish nm555Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02");
-Adafruit_MQTT_Publish nm615Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x02");
-Adafruit_MQTT_Publish nm630Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
-Adafruit_MQTT_Publish nm680Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
+Adafruit_MQTT_Publish tempFeed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x12");
+Adafruit_MQTT_Publish humidityFeed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x12");
+Adafruit_MQTT_Publish pressureFeed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x12");
+Adafruit_MQTT_Publish nm415Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x12");
+Adafruit_MQTT_Publish nm445Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x12");
+Adafruit_MQTT_Publish nm480Feed_12= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x12");
+Adafruit_MQTT_Publish nm515Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x12");
+Adafruit_MQTT_Publish nm555Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x12");
+Adafruit_MQTT_Publish nm615Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x12");
+Adafruit_MQTT_Publish nm630Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x12");
+Adafruit_MQTT_Publish nm680Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x12");
 
 
 
@@ -185,6 +185,9 @@ BleCharacteristic rxCharacteristic ("rx",BleCharacteristicProperty::WRITE_WO_RSP
 
 // Watchdog
 ApplicationWatchdog *wd;
+unsigned int lastPrint;
+int startingDevice;
+
 
 
 // Structs
@@ -240,7 +243,8 @@ void setup() {
   waitFor(Serial.isConnected,2500);
   Cellular.on();
   Cellular.connect();
-  delay(30000);
+  delay(10000);
+  Particle.connect();
   //getWiFi();
   //connectToNetwork();
   BLE.on();
@@ -250,33 +254,33 @@ void setup() {
   //wd = new ApplicationWatchdog(180000, watchdogHandler, 1536);
   pinMode(D7,OUTPUT);
   digitalWrite(D7, LOW);
+  startingDevice = 1;
   delay(2000);
 }
 
 void loop() {
-  MQTT_connect();
-  pingBroker();
-  
-
-  while(peer.connected()){
-    digitalWrite(D7, HIGH); 
-    peer.getCharacteristicByUUID(peerTxCharacteristic, txUuid); // Get peer device and TX characteristics.
-
-  }
-  if(!peer.connected()){
-    digitalWrite(D7, LOW);
+  //MQTT_connect();
+  //pingBroker();
+  digitalWrite(D7, LOW);
+  if(!BLE.connected()){
     bleConnect();
+    if((millis() - lastPrint) > 5000){
+      Serial.printf("Looking for devices...\n");
+      lastPrint = millis();
+    }
   }
+}
   
     
   
   
  
-}
+
 
 // Scan BLE devices then connect to the appropriate one
 void bleConnect(){
   static int deviceCount;
+  static int scanCount;
   String _deviceName;
   BleAdvertisingData advData;
   BleScanFilter filter;
@@ -284,29 +288,42 @@ void bleConnect(){
 
   // start scanning for devices advertising TxUUID
   Vector<BleScanResult> scanResults =  BLE.scanWithFilter(filter); 
-  if(scanResults.size()){
+  
+  if( scanResults.size() > 0 ){
     Serial.printf("%i devices found\n", scanResults.size());
     for(int ii = 0; ii < scanResults.size(); ii++){
-      String name = scanResults[ii].advertisingData().deviceName();
-      for(int i = 0; i < 13; i++){
-        if(name == String(deviceCount)){
-          //Serial.printf("scan count = %i\n", deviceCount);
-          peer = BLE.connect(scanResults[ii].address());
-          deviceCount++;
-          return;
+      if(String(deviceCount) == scanResults[ii].advertisingData().deviceName()){
+        peer = BLE.connect(scanResults[ii].address());
+        scanCount = scanResults.size() - 1;
+        if(peer.connected()){
+          digitalWrite(D7, HIGH); 
+          peer.getCharacteristicByUUID(peerTxCharacteristic, txUuid); // Get peer device and TX characteristics.
         }
-        else{
-          deviceCount++;
+        BLE.disconnect();
+        deviceCount++;
+        if((deviceCount > 12 ) || (deviceCount == 0)){
+          deviceCount = 1;
+          BLE.disconnect();
+
         }
-        if(deviceCount == 12){
-          deviceCount = 0;
-        }
+        return;
+        
       }
+        
+        
+    }
+    deviceCount++;
+    if((deviceCount > 12 ) || (deviceCount == 0)){
+      deviceCount = 1;
+      BLE.disconnect();
+
     }
   }
-}
-      
+    
+  }         
 
+      
+  
 void watchdogHandler(){
   System.reset(RESET_NO_WAIT);
 }
@@ -359,38 +376,38 @@ void onDataReceived(const uint8_t *data, size_t len, const BlePeerDevice &peer, 
     parseIncomingData(data, device_1, 1,feedArray);
     
   }
-  if(peer.address()[0] == 0x2D){
+  if(peer.address()[0] == 0xA5){
     parseIncomingData(data, device_2, 2, feedArray);
   
   }
-  if(peer.address()[0] == 0xAC){
+  if(peer.address()[0] == 0x4D){
     parseIncomingData(data, device_3, 3, feedArray);
   }
-  if(peer.address()[0] == 0x00){
+  if(peer.address()[0] == 0xF1){
     parseIncomingData(data, device_4, 4, feedArray);
   }
-  if(peer.address()[0] == 0x00){
+  if(peer.address()[0] == 0xC1){
     parseIncomingData(data, device_5, 5, feedArray);
   }
-  if(peer.address()[0] == 0x00){
+  if(peer.address()[0] == 0x59){
     parseIncomingData(data, device_6, 6, feedArray);
   }
-  if(peer.address()[0] == 0x00){
+  if(peer.address()[0] == 0xB9){
     parseIncomingData(data, device_7, 7, feedArray);
   }
-  if(peer.address()[0] == 0x00){
+  if(peer.address()[0] == 0x55){
     parseIncomingData(data, device_8, 8, feedArray);
   }
-  if(peer.address()[0] == 0x00){
+  if(peer.address()[0] == 0xF5){
     parseIncomingData(data, device_9, 9, feedArray);
   }
-  if(peer.address()[0] == 0x00){
+  if(peer.address()[0] == 0xD9){
     parseIncomingData(data, device_10, 10, feedArray);
   }
-  if(peer.address()[0] == 0x00){
+  if((peer.address()[0] == 0x4D) && (peer.address()[1] == 0x54)){
     parseIncomingData(data, device_11, 11, feedArray);
   }
-  if(peer.address()[0] == 0x00){
+  if((peer.address()[0] == 0x55) && (peer.address()[1] == 0x54)){
     parseIncomingData(data, device_12, 12, feedArray);
   }
 }
@@ -480,7 +497,7 @@ void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Ada
   //incomingMessage.remove(0,newDelimiter);
   deviceNum.lightColorReadings[7] = atof(nm680.c_str());
 
-  Serial.printf("Readings from device ID: %i\nTemperature: %0.1f\nHumidity %i\nBarometric pressure: %0.1f\n415 Wavelength: %0.4f\n445 Wavelength: %0.4f\n480 Wavelength: %0.4f\n515 Wavelength: %0.4f\n555 Wavelength: %0.4f\n590 Wavelength: %0.4f\n630 Wavelength: %0.4f\n680 Wavelength: %0.4f\n", deviceID, deviceNum.tempF ,deviceNum.humidity, deviceNum.pressure, deviceNum.lightColorReadings[0], deviceNum.lightColorReadings[1], deviceNum.lightColorReadings[2], deviceNum.lightColorReadings[3], deviceNum.lightColorReadings[6], deviceNum.lightColorReadings[7], deviceNum.lightColorReadings[8], deviceNum.lightColorReadings[9]);
+  Serial.printf("Readings from device ID: %i\nTemperature: %0.1f\nHumidity %i\nBarometric pressure: %0.1f\n415 Wavelength: %0.4f\n445 Wavelength: %0.4f\n480 Wavelength: %0.4f\n515 Wavelength: %0.4f\n555 Wavelength: %0.4f\n590 Wavelength: %0.4f\n630 Wavelength: %0.4f\n680 Wavelength: %0.4f\n", deviceID, deviceNum.tempF ,deviceNum.humidity, deviceNum.pressure, deviceNum.lightColorReadings[0], deviceNum.lightColorReadings[1], deviceNum.lightColorReadings[2], deviceNum.lightColorReadings[3], deviceNum.lightColorReadings[4], deviceNum.lightColorReadings[5], deviceNum.lightColorReadings[6], deviceNum.lightColorReadings[7]);
   if(mqtt.Update()){
     feedName[deviceID-1][0].publish(deviceNum.tempF);
     feedName[deviceID-1][1].publish(deviceNum.humidity);
