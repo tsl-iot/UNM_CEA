@@ -136,7 +136,7 @@ void sendThenDisconnect(){
 
   snprintf((char *)outgoingMessage, outgoingMessageSize, "%0.1f:%i:%0.2f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:\n", tempF, humidity, baroPressure, counts[0], counts[1], counts[2], counts[3], counts[6], counts[7], counts[8], counts[9]);
   txCharacteristic.setValue(outgoingMessage, outgoingMessageSize);
-  Serial.printf("%0.1f:%i:%0.2f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:\n", tempF, humidity, baroPressure, counts[0], counts[1], counts[2], counts[3], counts[6], counts[7], counts[8], counts[9]);
+  Serial.printf("Temperature: %0.1f\nHumidity: %i\nBarometric Pressure: %0.2f\nnm415: %0.4f\nnm445: %0.4f\nnm480: %0.4f\nnm515: %0.4f\nnm555: %0.4f\nnm590: %0.4f\nnm630: %0.4f\nnm680: %0.4f\n", tempF, humidity, baroPressure, counts[0], counts[1], counts[2], counts[3], counts[6], counts[7], counts[8], counts[9]);
   BLE.disconnect();
   SystemSleepConfiguration config;
   config.mode(SystemSleepMode::STOP).duration(30000);
@@ -182,6 +182,6 @@ void getAS7341(enviroSensors bmeData){
     // (indices 4 and 5)
     bmeData.counts[i] = as7341.toBasicCounts(bmeData.readings[i]);
   }
-  Serial.printf("%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f\n", bmeData.counts[0], bmeData.counts[1], bmeData.counts[2], bmeData.counts[3], bmeData.counts[6], bmeData.counts[7], bmeData.counts[8], bmeData.counts[9]);
+  Serial.printf("nm415: %0.4f\nnm445: %0.4f\nnm480: %0.4f\nnm515: %0.4f\nnm555: %0.4f\nnm590: %0.4f\nnm630: %0.4f\nnm680: %0.4f\n", bmeData.counts[0], bmeData.counts[1], bmeData.counts[2], bmeData.counts[3], bmeData.counts[6], bmeData.counts[7], bmeData.counts[8], bmeData.counts[9]);
 }
 

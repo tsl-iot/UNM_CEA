@@ -30,7 +30,7 @@ Adafruit_MQTT_Publish nm445Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x01"
 Adafruit_MQTT_Publish nm480Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x01");
 Adafruit_MQTT_Publish nm515Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x01");
 Adafruit_MQTT_Publish nm555Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x01");
-Adafruit_MQTT_Publish nm615Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x01");
+Adafruit_MQTT_Publish nm590Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x01");
 Adafruit_MQTT_Publish nm630Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x01");
 Adafruit_MQTT_Publish nm680Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x01");
 Adafruit_MQTT_Publish deviceNumberFeed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber");
@@ -43,7 +43,7 @@ Adafruit_MQTT_Publish nm445Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x02"
 Adafruit_MQTT_Publish nm480Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x02");
 Adafruit_MQTT_Publish nm515Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x02");
 Adafruit_MQTT_Publish nm555Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02");
-Adafruit_MQTT_Publish nm615Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x02");
+Adafruit_MQTT_Publish nm590Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x02");
 Adafruit_MQTT_Publish nm630Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
 Adafruit_MQTT_Publish nm680Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
 
@@ -55,7 +55,7 @@ Adafruit_MQTT_Publish nm445Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x03"
 Adafruit_MQTT_Publish nm480Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x03");
 Adafruit_MQTT_Publish nm515Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x03");
 Adafruit_MQTT_Publish nm555Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x03");
-Adafruit_MQTT_Publish nm615Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x03");
+Adafruit_MQTT_Publish nm590Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x03");
 Adafruit_MQTT_Publish nm630Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x03");
 Adafruit_MQTT_Publish nm680Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x03");
 
@@ -67,7 +67,7 @@ Adafruit_MQTT_Publish nm445Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x04"
 Adafruit_MQTT_Publish nm480Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x04");
 Adafruit_MQTT_Publish nm515Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x04");
 Adafruit_MQTT_Publish nm555Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x04");
-Adafruit_MQTT_Publish nm615Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x04");
+Adafruit_MQTT_Publish nm590Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x04");
 Adafruit_MQTT_Publish nm630Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x04");
 Adafruit_MQTT_Publish nm680Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x04");
 
@@ -79,7 +79,7 @@ Adafruit_MQTT_Publish nm445Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x05"
 Adafruit_MQTT_Publish nm480Feed_5= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x05");
 Adafruit_MQTT_Publish nm515Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x05");
 Adafruit_MQTT_Publish nm555Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x05");
-Adafruit_MQTT_Publish nm615Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x05");
+Adafruit_MQTT_Publish nm590Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x05");
 Adafruit_MQTT_Publish nm630Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x05");
 Adafruit_MQTT_Publish nm680Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x05");
 
@@ -91,7 +91,7 @@ Adafruit_MQTT_Publish nm445Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x06"
 Adafruit_MQTT_Publish nm480Feed_6= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x06");
 Adafruit_MQTT_Publish nm515Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x06");
 Adafruit_MQTT_Publish nm555Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x06");
-Adafruit_MQTT_Publish nm615Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x06");
+Adafruit_MQTT_Publish nm590Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x06");
 Adafruit_MQTT_Publish nm630Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x06");
 Adafruit_MQTT_Publish nm680Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x06");
 
@@ -103,7 +103,7 @@ Adafruit_MQTT_Publish nm445Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x07"
 Adafruit_MQTT_Publish nm480Feed_7= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x07");
 Adafruit_MQTT_Publish nm515Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x07");
 Adafruit_MQTT_Publish nm555Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x07");
-Adafruit_MQTT_Publish nm615Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x07");
+Adafruit_MQTT_Publish nm590Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x07");
 Adafruit_MQTT_Publish nm630Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x07");
 Adafruit_MQTT_Publish nm680Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x07");
 
@@ -115,7 +115,7 @@ Adafruit_MQTT_Publish nm445Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x08"
 Adafruit_MQTT_Publish nm480Feed_8= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x08");
 Adafruit_MQTT_Publish nm515Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x08");
 Adafruit_MQTT_Publish nm555Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x08");
-Adafruit_MQTT_Publish nm615Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x08");
+Adafruit_MQTT_Publish nm590Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x08");
 Adafruit_MQTT_Publish nm630Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x08");
 Adafruit_MQTT_Publish nm680Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x08");
 
@@ -127,7 +127,7 @@ Adafruit_MQTT_Publish nm445Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x09"
 Adafruit_MQTT_Publish nm480Feed_9= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x09");
 Adafruit_MQTT_Publish nm515Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x09");
 Adafruit_MQTT_Publish nm555Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x09");
-Adafruit_MQTT_Publish nm615Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x09");
+Adafruit_MQTT_Publish nm590Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x09");
 Adafruit_MQTT_Publish nm630Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x09");
 Adafruit_MQTT_Publish nm680Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x09");
 
@@ -139,7 +139,7 @@ Adafruit_MQTT_Publish nm445Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x10
 Adafruit_MQTT_Publish nm480Feed_10= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x10");
 Adafruit_MQTT_Publish nm515Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x10");
 Adafruit_MQTT_Publish nm555Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x10");
-Adafruit_MQTT_Publish nm615Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x10");
+Adafruit_MQTT_Publish nm590Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x10");
 Adafruit_MQTT_Publish nm630Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x10");
 Adafruit_MQTT_Publish nm680Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x10");
 
@@ -151,7 +151,7 @@ Adafruit_MQTT_Publish nm445Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x11
 Adafruit_MQTT_Publish nm480Feed_11= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x11");
 Adafruit_MQTT_Publish nm515Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x11");
 Adafruit_MQTT_Publish nm555Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x11");
-Adafruit_MQTT_Publish nm615Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x11");
+Adafruit_MQTT_Publish nm590Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x11");
 Adafruit_MQTT_Publish nm630Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x11");
 Adafruit_MQTT_Publish nm680Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x11");
 
@@ -163,7 +163,7 @@ Adafruit_MQTT_Publish nm445Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x12
 Adafruit_MQTT_Publish nm480Feed_12= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x12");
 Adafruit_MQTT_Publish nm515Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x12");
 Adafruit_MQTT_Publish nm555Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x12");
-Adafruit_MQTT_Publish nm615Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x12");
+Adafruit_MQTT_Publish nm590Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x12");
 Adafruit_MQTT_Publish nm630Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x12");
 Adafruit_MQTT_Publish nm680Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x12");
 
@@ -211,18 +211,18 @@ Devices device_11;
 Devices device_12;
 
 Adafruit_MQTT_Publish feedArray[12][12] = {
-{tempFeed_1, humidityFeed_1, pressureFeed_1, nm415Feed_1, nm445Feed_1, nm480Feed_1, nm515Feed_1, nm555Feed_1, nm615Feed_1, nm630Feed_1, nm680Feed_1, deviceNumberFeed},
-{tempFeed_2, humidityFeed_2, pressureFeed_2, nm415Feed_2, nm445Feed_2, nm480Feed_2, nm515Feed_2, nm555Feed_2, nm615Feed_2, nm630Feed_2, nm680Feed_2, deviceNumberFeed},
-{tempFeed_3, humidityFeed_3, pressureFeed_3, nm415Feed_3, nm445Feed_3, nm480Feed_3, nm515Feed_3, nm555Feed_3, nm615Feed_3, nm630Feed_3, nm680Feed_3, deviceNumberFeed},
-{tempFeed_4, humidityFeed_4, pressureFeed_4, nm415Feed_4, nm445Feed_4, nm480Feed_4, nm515Feed_4, nm555Feed_4, nm615Feed_4, nm630Feed_4, nm680Feed_4, deviceNumberFeed},
-{tempFeed_5, humidityFeed_5, pressureFeed_5, nm415Feed_5, nm445Feed_5, nm480Feed_5, nm515Feed_5, nm555Feed_5, nm615Feed_5, nm630Feed_5, nm680Feed_5, deviceNumberFeed},
-{tempFeed_6, humidityFeed_6, pressureFeed_6, nm415Feed_6, nm445Feed_6, nm480Feed_6, nm515Feed_6, nm555Feed_6, nm615Feed_6, nm630Feed_6, nm680Feed_6, deviceNumberFeed},
-{tempFeed_7, humidityFeed_7, pressureFeed_7, nm415Feed_7, nm445Feed_7, nm480Feed_7, nm515Feed_7, nm555Feed_7, nm615Feed_7, nm630Feed_7, nm680Feed_7, deviceNumberFeed},
-{tempFeed_8, humidityFeed_8, pressureFeed_8, nm415Feed_8, nm445Feed_8, nm480Feed_8, nm515Feed_8, nm555Feed_8, nm615Feed_8, nm630Feed_8, nm680Feed_8, deviceNumberFeed},
-{tempFeed_9, humidityFeed_9, pressureFeed_9, nm415Feed_9, nm445Feed_9, nm480Feed_9, nm515Feed_9, nm555Feed_9, nm615Feed_9, nm630Feed_9, nm680Feed_9, deviceNumberFeed},
-{tempFeed_10, humidityFeed_10, pressureFeed_10, nm415Feed_10, nm445Feed_10, nm480Feed_10, nm515Feed_10, nm555Feed_10, nm615Feed_10, nm630Feed_10, nm680Feed_10, deviceNumberFeed},
-{tempFeed_11, humidityFeed_11, pressureFeed_11, nm415Feed_11, nm445Feed_11, nm480Feed_11, nm515Feed_11, nm555Feed_11, nm615Feed_11, nm630Feed_11, nm680Feed_11, deviceNumberFeed},
-{tempFeed_12, humidityFeed_12, pressureFeed_12, nm415Feed_12, nm445Feed_12, nm480Feed_12, nm515Feed_12, nm555Feed_12, nm615Feed_12, nm630Feed_12, nm680Feed_12, deviceNumberFeed}
+{tempFeed_1, humidityFeed_1, pressureFeed_1, nm415Feed_1, nm445Feed_1, nm480Feed_1, nm515Feed_1, nm555Feed_1, nm590Feed_1, nm630Feed_1, nm680Feed_1, deviceNumberFeed},
+{tempFeed_2, humidityFeed_2, pressureFeed_2, nm415Feed_2, nm445Feed_2, nm480Feed_2, nm515Feed_2, nm555Feed_2, nm590Feed_2, nm630Feed_2, nm680Feed_2, deviceNumberFeed},
+{tempFeed_3, humidityFeed_3, pressureFeed_3, nm415Feed_3, nm445Feed_3, nm480Feed_3, nm515Feed_3, nm555Feed_3, nm590Feed_3, nm630Feed_3, nm680Feed_3, deviceNumberFeed},
+{tempFeed_4, humidityFeed_4, pressureFeed_4, nm415Feed_4, nm445Feed_4, nm480Feed_4, nm515Feed_4, nm555Feed_4, nm590Feed_4, nm630Feed_4, nm680Feed_4, deviceNumberFeed},
+{tempFeed_5, humidityFeed_5, pressureFeed_5, nm415Feed_5, nm445Feed_5, nm480Feed_5, nm515Feed_5, nm555Feed_5, nm590Feed_5, nm630Feed_5, nm680Feed_5, deviceNumberFeed},
+{tempFeed_6, humidityFeed_6, pressureFeed_6, nm415Feed_6, nm445Feed_6, nm480Feed_6, nm515Feed_6, nm555Feed_6, nm590Feed_6, nm630Feed_6, nm680Feed_6, deviceNumberFeed},
+{tempFeed_7, humidityFeed_7, pressureFeed_7, nm415Feed_7, nm445Feed_7, nm480Feed_7, nm515Feed_7, nm555Feed_7, nm590Feed_7, nm630Feed_7, nm680Feed_7, deviceNumberFeed},
+{tempFeed_8, humidityFeed_8, pressureFeed_8, nm415Feed_8, nm445Feed_8, nm480Feed_8, nm515Feed_8, nm555Feed_8, nm590Feed_8, nm630Feed_8, nm680Feed_8, deviceNumberFeed},
+{tempFeed_9, humidityFeed_9, pressureFeed_9, nm415Feed_9, nm445Feed_9, nm480Feed_9, nm515Feed_9, nm555Feed_9, nm590Feed_9, nm630Feed_9, nm680Feed_9, deviceNumberFeed},
+{tempFeed_10, humidityFeed_10, pressureFeed_10, nm415Feed_10, nm445Feed_10, nm480Feed_10, nm515Feed_10, nm555Feed_10, nm590Feed_10, nm630Feed_10, nm680Feed_10, deviceNumberFeed},
+{tempFeed_11, humidityFeed_11, pressureFeed_11, nm415Feed_11, nm445Feed_11, nm480Feed_11, nm515Feed_11, nm555Feed_11, nm590Feed_11, nm630Feed_11, nm680Feed_11, deviceNumberFeed},
+{tempFeed_12, humidityFeed_12, pressureFeed_12, nm415Feed_12, nm445Feed_12, nm480Feed_12, nm515Feed_12, nm555Feed_12, nm590Feed_12, nm630Feed_12, nm680Feed_12, deviceNumberFeed}
 
 
 
@@ -513,67 +513,3 @@ void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Ada
     feedName[deviceID-1][11].publish(deviceID);
   }
 }
-
-// void connectToNetwork(){
-//   unsigned int lastConnect = 0;
-
-//   WiFi.on();
-//   WiFi.connect();
-//   while(WiFi.connecting() && ((millis() - lastConnect) < 60000)) {
-//     Serial.printf(".");
-//     delay(100);
-//   }
-//   if(WiFi.ready()){
-//     Serial.printf("Connected to WiFi!\n");
-//   }
-//   else{
-//     Serial.printf("Couldn't connected to WiFi\n");
-//     Cellular.on();
-//     Cellular.connect();
-//     lastConnect = millis();
-//   }
-//   while(Cellular.connecting() && ((millis() - lastConnect) < 60000)){
-//     Serial.printf("x");
-//     delay(100);
-//   }
-//   if(Cellular.ready()){
-//     Serial.printf("Connected to Cellular!\n");
-//   }
-//   else{
-//     Serial.printf("Couldn't connected to Cellular\n");
-//   }
-  
-
-//   // while(WiFi.connecting() && ((millis() - lastConnect) < 60000)){
-//   //   Serial.printf(".");
-//   // }
-//   // if(!WiFi.ready()){
-//   //   WiFi.disconnect();
-//   //   WiFi.off();
-//   //   Cellular.on();
-//   //   Cellular.connect();
-//   //   Serial.printf("Couldn't connect to WiFi\n");
-//   // }
-//   // else{
-//   //   Serial.printf("Connected to WiFi!\n");
-//   //   Particle.connect();
-//   // }
-//   // while(!WiFi.ready() && ((millis() - lastConnect) < 60000) && Cellular.connecting()){
-//   //   Serial.printf("x");
-//   // }
-//   // if(!Cellular.ready()){
-//   //   Cellular.disconnect();
-//   //   Cellular.off();
-//   //   Serial.printf("Couldn't connect to Cellular\n");
-//   // }
-//   // else{
-//   //   Serial.printf("Connected to Cellular!\n");
-//   // }
-//   // if(!WiFi.ready() && !Cellular.ready()){
-//   //   Serial.printf("Couldn't connect to WiFi or Cellular network\n");
-//   //   //connectToNetwork();
-//   // }
-// }
-
-
-// }
