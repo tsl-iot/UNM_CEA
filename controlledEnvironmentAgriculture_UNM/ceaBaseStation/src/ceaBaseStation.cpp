@@ -167,6 +167,30 @@ Adafruit_MQTT_Publish nm590Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x12
 Adafruit_MQTT_Publish nm630Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x12");
 Adafruit_MQTT_Publish nm680Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x12");
 
+Adafruit_MQTT_Publish tempFeed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x13");
+Adafruit_MQTT_Publish humidityFeed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x13");
+Adafruit_MQTT_Publish pressureFeed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x13");
+Adafruit_MQTT_Publish nm415Feed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x13");
+Adafruit_MQTT_Publish nm445Feed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x13");
+Adafruit_MQTT_Publish nm480Feed_13= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x13");
+Adafruit_MQTT_Publish nm515Feed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x13");
+Adafruit_MQTT_Publish nm555Feed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x13");
+Adafruit_MQTT_Publish nm590Feed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x13");
+Adafruit_MQTT_Publish nm630Feed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x13");
+Adafruit_MQTT_Publish nm680Feed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x13");
+
+Adafruit_MQTT_Publish tempFeed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x14");
+Adafruit_MQTT_Publish humidityFeed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x14");
+Adafruit_MQTT_Publish pressureFeed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/pressure0x14");
+Adafruit_MQTT_Publish nm415Feed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4150x14");
+Adafruit_MQTT_Publish nm445Feed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/nm4450x14");
+Adafruit_MQTT_Publish nm480Feed_14= Adafruit_MQTT_Publish(&mqtt, "cea/nm4800x14");
+Adafruit_MQTT_Publish nm515Feed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5150x14");
+Adafruit_MQTT_Publish nm555Feed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x14");
+Adafruit_MQTT_Publish nm590Feed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x14");
+Adafruit_MQTT_Publish nm630Feed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x14");
+Adafruit_MQTT_Publish nm680Feed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x14");
+
 
 
 
@@ -209,8 +233,10 @@ Devices device_9;
 Devices device_10;
 Devices device_11;
 Devices device_12;
+Devices device_13;
+Devices device_14;
 
-Adafruit_MQTT_Publish feedArray[12][12] = {
+Adafruit_MQTT_Publish feedArray[14][12] = {
 {tempFeed_1, humidityFeed_1, pressureFeed_1, nm415Feed_1, nm445Feed_1, nm480Feed_1, nm515Feed_1, nm555Feed_1, nm590Feed_1, nm630Feed_1, nm680Feed_1, deviceNumberFeed},
 {tempFeed_2, humidityFeed_2, pressureFeed_2, nm415Feed_2, nm445Feed_2, nm480Feed_2, nm515Feed_2, nm555Feed_2, nm590Feed_2, nm630Feed_2, nm680Feed_2, deviceNumberFeed},
 {tempFeed_3, humidityFeed_3, pressureFeed_3, nm415Feed_3, nm445Feed_3, nm480Feed_3, nm515Feed_3, nm555Feed_3, nm590Feed_3, nm630Feed_3, nm680Feed_3, deviceNumberFeed},
@@ -222,10 +248,9 @@ Adafruit_MQTT_Publish feedArray[12][12] = {
 {tempFeed_9, humidityFeed_9, pressureFeed_9, nm415Feed_9, nm445Feed_9, nm480Feed_9, nm515Feed_9, nm555Feed_9, nm590Feed_9, nm630Feed_9, nm680Feed_9, deviceNumberFeed},
 {tempFeed_10, humidityFeed_10, pressureFeed_10, nm415Feed_10, nm445Feed_10, nm480Feed_10, nm515Feed_10, nm555Feed_10, nm590Feed_10, nm630Feed_10, nm680Feed_10, deviceNumberFeed},
 {tempFeed_11, humidityFeed_11, pressureFeed_11, nm415Feed_11, nm445Feed_11, nm480Feed_11, nm515Feed_11, nm555Feed_11, nm590Feed_11, nm630Feed_11, nm680Feed_11, deviceNumberFeed},
-{tempFeed_12, humidityFeed_12, pressureFeed_12, nm415Feed_12, nm445Feed_12, nm480Feed_12, nm515Feed_12, nm555Feed_12, nm590Feed_12, nm630Feed_12, nm680Feed_12, deviceNumberFeed}
-
-
-
+{tempFeed_12, humidityFeed_12, pressureFeed_12, nm415Feed_12, nm445Feed_12, nm480Feed_12, nm515Feed_12, nm555Feed_12, nm590Feed_12, nm630Feed_12, nm680Feed_12, deviceNumberFeed},
+{tempFeed_13, humidityFeed_13, pressureFeed_13, nm415Feed_13, nm445Feed_13, nm480Feed_13, nm515Feed_13, nm555Feed_13, nm590Feed_13, nm630Feed_13, nm680Feed_13, deviceNumberFeed},
+{tempFeed_14, humidityFeed_14, pressureFeed_13, nm415Feed_14, nm445Feed_14, nm480Feed_14, nm515Feed_14, nm555Feed_14, nm590Feed_14, nm630Feed_14, nm680Feed_14, deviceNumberFeed}
 };
 
 //Functions
@@ -234,9 +259,8 @@ void MQTT_connect();
 void pingBroker();
 uint64_t millis64bit();
 void watchdogHandler();
-void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Adafruit_MQTT_Publish feedName[12][12]);
-// void connectToNetwork();
-// void getWiFi();
+void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Adafruit_MQTT_Publish feedName[14][12]);
+
 
 void setup() {
   Serial.begin(9600);
@@ -245,13 +269,12 @@ void setup() {
   Cellular.connect();
   delay(10000);
   Particle.connect();
-  //getWiFi();
-  //connectToNetwork();
+ 
   BLE.on();
   peerTxCharacteristic.onDataReceived(onDataReceived, &peerTxCharacteristic);
   BLE.setTxPower(8);
   Serial.printf("M-SOM BLE Address: %s\n",BLE.address().toString().c_str());
-  //wd = new ApplicationWatchdog(180000, watchdogHandler, 1536);
+
   pinMode(D7,OUTPUT);
   digitalWrite(D7, LOW);
   startingDevice = 1;
@@ -301,7 +324,7 @@ void bleConnect(){
         }
         BLE.disconnect();
         deviceCount++;
-        if((deviceCount > 12 ) || (deviceCount == 0)){
+        if((deviceCount > 14 ) || (deviceCount == 0)){
           deviceCount = 1;
           BLE.disconnect();
 
@@ -313,7 +336,7 @@ void bleConnect(){
         
     }
     deviceCount++;
-    if((deviceCount > 12 ) || (deviceCount == 0)){
+    if((deviceCount > 14 ) || (deviceCount == 0)){
       deviceCount = 1;
       BLE.disconnect();
 
@@ -410,10 +433,17 @@ void onDataReceived(const uint8_t *data, size_t len, const BlePeerDevice &peer, 
   if((peer.address()[0] == 0x55) && (peer.address()[1] == 0x54)){
     parseIncomingData(data, device_12, 12, feedArray);
   }
+  if(peer.address()[0] == 0x20){
+    parseIncomingData(data, device_13, 13, feedArray);
+  }
+    if(peer.address()[0] == 0x4C){
+    parseIncomingData(data, device_14, 14, feedArray);
+  }
+  
 }
 
 
-void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Adafruit_MQTT_Publish feedName[12][12]){
+void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Adafruit_MQTT_Publish feedName[14][12]){
 
   String incomingMessage;
   int newDelimiter;

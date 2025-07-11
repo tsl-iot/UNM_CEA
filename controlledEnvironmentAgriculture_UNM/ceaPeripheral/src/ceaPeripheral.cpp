@@ -60,7 +60,7 @@ void setup() {
   BLE.on();
   BLE.addCharacteristic(txCharacteristic);
   data.appendServiceUUID(txUuid);
-  data.appendLocalName("12");
+  data.appendLocalName("12"); // change this to your device number
   BLE.advertise(&data);
   BLE.setTxPower(8);
   pinMode(D7, OUTPUT);
