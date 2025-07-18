@@ -6,6 +6,6 @@
     },
     "particle.targetPlatform": "msom",
     "particle.firmwareVersion": "5.9.0",
-    "particle.targetDevice": "0a10aced202194944a051cc4",
+    "particle.targetDevice": "",
     "C_Cpp.errorSquiggles": "enabled"
 }

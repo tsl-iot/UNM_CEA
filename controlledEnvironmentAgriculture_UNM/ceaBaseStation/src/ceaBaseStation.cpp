@@ -250,7 +250,7 @@ Adafruit_MQTT_Publish feedArray[14][12] = {
 {tempFeed_11, humidityFeed_11, pressureFeed_11, nm415Feed_11, nm445Feed_11, nm480Feed_11, nm515Feed_11, nm555Feed_11, nm590Feed_11, nm630Feed_11, nm680Feed_11, deviceNumberFeed},
 {tempFeed_12, humidityFeed_12, pressureFeed_12, nm415Feed_12, nm445Feed_12, nm480Feed_12, nm515Feed_12, nm555Feed_12, nm590Feed_12, nm630Feed_12, nm680Feed_12, deviceNumberFeed},
 {tempFeed_13, humidityFeed_13, pressureFeed_13, nm415Feed_13, nm445Feed_13, nm480Feed_13, nm515Feed_13, nm555Feed_13, nm590Feed_13, nm630Feed_13, nm680Feed_13, deviceNumberFeed},
-{tempFeed_14, humidityFeed_14, pressureFeed_13, nm415Feed_14, nm445Feed_14, nm480Feed_14, nm515Feed_14, nm555Feed_14, nm590Feed_14, nm630Feed_14, nm680Feed_14, deviceNumberFeed}
+{tempFeed_14, humidityFeed_14, pressureFeed_14, nm415Feed_14, nm445Feed_14, nm480Feed_14, nm515Feed_14, nm555Feed_14, nm590Feed_14, nm630Feed_14, nm680Feed_14, deviceNumberFeed}
 };
 
 //Functions
@@ -403,7 +403,7 @@ void onDataReceived(const uint8_t *data, size_t len, const BlePeerDevice &peer, 
     parseIncomingData(data, device_2, 2, feedArray);
   
   }
-  if(peer.address()[0] == 0x4D){
+  if((peer.address()[0] == 0x4D) && (peer.address()[1] != 0x2F)) {
     parseIncomingData(data, device_3, 3, feedArray);
   }
   if(peer.address()[0] == 0xF1){
@@ -436,7 +436,7 @@ void onDataReceived(const uint8_t *data, size_t len, const BlePeerDevice &peer, 
   if(peer.address()[0] == 0x20){
     parseIncomingData(data, device_13, 13, feedArray);
   }
-    if(peer.address()[0] == 0x4C){
+    if((peer.address()[0] == 0x4D) && (peer.address()[1] == 0x2F)){
     parseIncomingData(data, device_14, 14, feedArray);
   }
   
