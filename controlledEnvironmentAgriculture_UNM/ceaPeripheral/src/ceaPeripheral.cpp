@@ -19,17 +19,9 @@ SYSTEM_MODE(SEMI_AUTOMATIC);
 
 
 const BleUuid serviceUuid("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
-
 const BleUuid txUuid("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
 BleCharacteristic txCharacteristic("tx",BleCharacteristicProperty::INDICATE,txUuid,serviceUuid);
 BleAdvertisingData data;
-
-const int outgoingMessageSize = 100;
-uint8_t outgoingMessage[outgoingMessageSize];
-unsigned int lastRead;
-
-
-
 
 struct enviroSensors{
   float tempF;
@@ -39,19 +31,15 @@ struct enviroSensors{
   float counts[12];
 };
 enviroSensors enviroData;
-
 Adafruit_BME280 bme;
 Adafruit_AS7341 as7341;
 
 
 void getBME(enviroSensors bmeData);
 void getAS7341(enviroSensors as7341Data);
-
-
-
 void sendThenDisconnect();
 
-
+unsigned int lastRead;
 
 void setup() {
   Serial.begin(9600);
@@ -60,11 +48,12 @@ void setup() {
   BLE.on();
   BLE.addCharacteristic(txCharacteristic);
   data.appendServiceUUID(txUuid);
-  data.appendLocalName("12"); // change this to your device number
+  data.appendLocalName("3"); // change this to your device number
   BLE.advertise(&data);
   BLE.setTxPower(8);
   pinMode(D7, OUTPUT);
   digitalWrite(D7, LOW);
+
 
   if(!bme.begin(0x77)){
     Serial.printf("Could not start BME280\n");
@@ -103,7 +92,8 @@ void loop() {
 }
 
 void sendThenDisconnect(){
- 
+  const int outgoingMessageSize = 120;
+  uint8_t outgoingMessage[outgoingMessageSize];
   float tempF;
   int humidity;
   float baroPressure;
@@ -134,9 +124,9 @@ void sendThenDisconnect(){
 
 
 
-  snprintf((char *)outgoingMessage, outgoingMessageSize, "%0.1f:%i:%0.2f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:%0.4f:\n", tempF, humidity, baroPressure, counts[0], counts[1], counts[2], counts[3], counts[6], counts[7], counts[8], counts[9]);
+  snprintf((char *)outgoingMessage, outgoingMessageSize, "%0.1f:%i:%0.2f:%0.5f:%0.5f:%0.5f:%0.5f:%0.5f:%0.5f:%0.5f:%0.5f:\n", tempF, humidity, baroPressure, counts[0], counts[1], counts[2], counts[3], counts[6], counts[7], counts[8], counts[9]);
   txCharacteristic.setValue(outgoingMessage, outgoingMessageSize);
-  Serial.printf("Temperature: %0.1f\nHumidity: %i\nBarometric Pressure: %0.2f\nnm415: %0.4f\nnm445: %0.4f\nnm480: %0.4f\nnm515: %0.4f\nnm555: %0.4f\nnm590: %0.4f\nnm630: %0.4f\nnm680: %0.4f\n", tempF, humidity, baroPressure, counts[0], counts[1], counts[2], counts[3], counts[6], counts[7], counts[8], counts[9]);
+  Serial.printf("Temperature: %0.1f\nHumidity: %i\nBarometric Pressure: %0.2f\nnm415: %0.5f\nnm445: %0.5f\nnm480: %0.5f\nnm515: %0.5f\nnm555: %0.5f\nnm590: %0.5f\nnm630: %0.5f\nnm680: %0.5f\n", tempF, humidity, baroPressure, counts[0], counts[1], counts[2], counts[3], counts[6], counts[7], counts[8], counts[9]);
   BLE.disconnect();
   SystemSleepConfiguration config;
   config.mode(SystemSleepMode::STOP).duration(30000);
@@ -144,16 +134,12 @@ void sendThenDisconnect(){
   if(result.wakeupReason() == SystemSleepWakeupReason::BY_RTC){
     delay(30000);
   }
-  // BLE.off();
-  // delay(30000);
-  // BLE.on();
-  // delay(15000);
-    }
+}
 
 void getBME(enviroSensors bmeData){
   bmeData.tempF = (bme.readTemperature() * (9.0/5.0)) + 32.0;
   bmeData.humidity = (int)bme.readHumidity();
-  bmeData.baroPressure = (bme.readPressure() / 3386.39) + 5;
+  bmeData.baroPressure = (bme.readPressure() / 3386.39);
   Serial.printf("Temp: %0.1f\nHumidity: %i\nBarometric Pressure: %0.2f\n", bmeData.tempF, bmeData.humidity, bmeData.baroPressure);
 }
 

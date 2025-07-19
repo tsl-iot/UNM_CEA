@@ -4,6 +4,10 @@
  * Date: 04/21/2025
  * For comprehensive documentation and examples, please visit:
  * https://docs.particle.io/firmware/best-practices/firmware-template/
+ * -----------------------------------------------------------------------
+ * Use the device id for cloud flashing
+ * Your device id is 0a10aced202194944a051cc4
+ * Your system firmware version is 5.9.0
  */
 
 // Include Particle Device OS APIs
@@ -33,7 +37,7 @@ Adafruit_MQTT_Publish nm555Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x01"
 Adafruit_MQTT_Publish nm590Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x01");
 Adafruit_MQTT_Publish nm630Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x01");
 Adafruit_MQTT_Publish nm680Feed_1 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x01");
-Adafruit_MQTT_Publish deviceNumberFeed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber");
+Adafruit_MQTT_Publish device_01_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber01");
 // Device 1 Feeds
 Adafruit_MQTT_Publish tempFeed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x02");
 Adafruit_MQTT_Publish humidityFeed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x02");
@@ -46,6 +50,8 @@ Adafruit_MQTT_Publish nm555Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x02"
 Adafruit_MQTT_Publish nm590Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x02");
 Adafruit_MQTT_Publish nm630Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x02");
 Adafruit_MQTT_Publish nm680Feed_2 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x02");
+Adafruit_MQTT_Publish device_02_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber02");
+
 
 Adafruit_MQTT_Publish tempFeed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x03");
 Adafruit_MQTT_Publish humidityFeed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x03");
@@ -58,6 +64,8 @@ Adafruit_MQTT_Publish nm555Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x03"
 Adafruit_MQTT_Publish nm590Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x03");
 Adafruit_MQTT_Publish nm630Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x03");
 Adafruit_MQTT_Publish nm680Feed_3 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x03");
+Adafruit_MQTT_Publish device_03_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber03");
+
 
 Adafruit_MQTT_Publish tempFeed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x04");
 Adafruit_MQTT_Publish humidityFeed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x04");
@@ -70,6 +78,8 @@ Adafruit_MQTT_Publish nm555Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x04"
 Adafruit_MQTT_Publish nm590Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x04");
 Adafruit_MQTT_Publish nm630Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x04");
 Adafruit_MQTT_Publish nm680Feed_4 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x04");
+Adafruit_MQTT_Publish device_04_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber04");
+
 
 Adafruit_MQTT_Publish tempFeed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x05");
 Adafruit_MQTT_Publish humidityFeed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x05");
@@ -82,6 +92,8 @@ Adafruit_MQTT_Publish nm555Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x05"
 Adafruit_MQTT_Publish nm590Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6150x05");
 Adafruit_MQTT_Publish nm630Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x05");
 Adafruit_MQTT_Publish nm680Feed_5 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x05");
+Adafruit_MQTT_Publish device_05_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber05");
+
 
 Adafruit_MQTT_Publish tempFeed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x06");
 Adafruit_MQTT_Publish humidityFeed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x06");
@@ -94,6 +106,8 @@ Adafruit_MQTT_Publish nm555Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x06"
 Adafruit_MQTT_Publish nm590Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x06");
 Adafruit_MQTT_Publish nm630Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x06");
 Adafruit_MQTT_Publish nm680Feed_6 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x06");
+Adafruit_MQTT_Publish device_06_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber06");
+
 
 Adafruit_MQTT_Publish tempFeed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x07");
 Adafruit_MQTT_Publish humidityFeed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x07");
@@ -106,6 +120,8 @@ Adafruit_MQTT_Publish nm555Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x07"
 Adafruit_MQTT_Publish nm590Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x07");
 Adafruit_MQTT_Publish nm630Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x07");
 Adafruit_MQTT_Publish nm680Feed_7 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x07");
+Adafruit_MQTT_Publish device_07_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber07");
+
 
 Adafruit_MQTT_Publish tempFeed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x08");
 Adafruit_MQTT_Publish humidityFeed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x08");
@@ -118,6 +134,8 @@ Adafruit_MQTT_Publish nm555Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x08"
 Adafruit_MQTT_Publish nm590Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x08");
 Adafruit_MQTT_Publish nm630Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x08");
 Adafruit_MQTT_Publish nm680Feed_8 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x08");
+Adafruit_MQTT_Publish device_08_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber08");
+
 
 Adafruit_MQTT_Publish tempFeed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x09");
 Adafruit_MQTT_Publish humidityFeed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x09");
@@ -130,6 +148,7 @@ Adafruit_MQTT_Publish nm555Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x09"
 Adafruit_MQTT_Publish nm590Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x09");
 Adafruit_MQTT_Publish nm630Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x09");
 Adafruit_MQTT_Publish nm680Feed_9 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x09");
+Adafruit_MQTT_Publish device_09_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber09");
 
 Adafruit_MQTT_Publish tempFeed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x10");
 Adafruit_MQTT_Publish humidityFeed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x10");
@@ -142,6 +161,7 @@ Adafruit_MQTT_Publish nm555Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x10
 Adafruit_MQTT_Publish nm590Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x10");
 Adafruit_MQTT_Publish nm630Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x10");
 Adafruit_MQTT_Publish nm680Feed_10 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x10");
+Adafruit_MQTT_Publish device_10_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber10");
 
 Adafruit_MQTT_Publish tempFeed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x11");
 Adafruit_MQTT_Publish humidityFeed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x11");
@@ -154,6 +174,7 @@ Adafruit_MQTT_Publish nm555Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x11
 Adafruit_MQTT_Publish nm590Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x11");
 Adafruit_MQTT_Publish nm630Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x11");
 Adafruit_MQTT_Publish nm680Feed_11 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x11");
+Adafruit_MQTT_Publish device_11_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber11");
 
 Adafruit_MQTT_Publish tempFeed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x12");
 Adafruit_MQTT_Publish humidityFeed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x12");
@@ -166,6 +187,7 @@ Adafruit_MQTT_Publish nm555Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x12
 Adafruit_MQTT_Publish nm590Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x12");
 Adafruit_MQTT_Publish nm630Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x12");
 Adafruit_MQTT_Publish nm680Feed_12 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x12");
+Adafruit_MQTT_Publish device_12_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber12");
 
 Adafruit_MQTT_Publish tempFeed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x13");
 Adafruit_MQTT_Publish humidityFeed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x13");
@@ -178,6 +200,8 @@ Adafruit_MQTT_Publish nm555Feed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x13
 Adafruit_MQTT_Publish nm590Feed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x13");
 Adafruit_MQTT_Publish nm630Feed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x13");
 Adafruit_MQTT_Publish nm680Feed_13 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x13");
+Adafruit_MQTT_Publish device_13_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber13");
+
 
 Adafruit_MQTT_Publish tempFeed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/temperature0x14");
 Adafruit_MQTT_Publish humidityFeed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/humidity0x14");
@@ -190,6 +214,8 @@ Adafruit_MQTT_Publish nm555Feed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5550x14
 Adafruit_MQTT_Publish nm590Feed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/nm5900x14");
 Adafruit_MQTT_Publish nm630Feed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6300x14");
 Adafruit_MQTT_Publish nm680Feed_14 = Adafruit_MQTT_Publish(&mqtt, "cea/nm6800x14");
+Adafruit_MQTT_Publish device_14_Feed = Adafruit_MQTT_Publish(&mqtt, "cea/devicenumber14");
+
 
 
 
@@ -237,20 +263,20 @@ Devices device_13;
 Devices device_14;
 
 Adafruit_MQTT_Publish feedArray[14][12] = {
-{tempFeed_1, humidityFeed_1, pressureFeed_1, nm415Feed_1, nm445Feed_1, nm480Feed_1, nm515Feed_1, nm555Feed_1, nm590Feed_1, nm630Feed_1, nm680Feed_1, deviceNumberFeed},
-{tempFeed_2, humidityFeed_2, pressureFeed_2, nm415Feed_2, nm445Feed_2, nm480Feed_2, nm515Feed_2, nm555Feed_2, nm590Feed_2, nm630Feed_2, nm680Feed_2, deviceNumberFeed},
-{tempFeed_3, humidityFeed_3, pressureFeed_3, nm415Feed_3, nm445Feed_3, nm480Feed_3, nm515Feed_3, nm555Feed_3, nm590Feed_3, nm630Feed_3, nm680Feed_3, deviceNumberFeed},
-{tempFeed_4, humidityFeed_4, pressureFeed_4, nm415Feed_4, nm445Feed_4, nm480Feed_4, nm515Feed_4, nm555Feed_4, nm590Feed_4, nm630Feed_4, nm680Feed_4, deviceNumberFeed},
-{tempFeed_5, humidityFeed_5, pressureFeed_5, nm415Feed_5, nm445Feed_5, nm480Feed_5, nm515Feed_5, nm555Feed_5, nm590Feed_5, nm630Feed_5, nm680Feed_5, deviceNumberFeed},
-{tempFeed_6, humidityFeed_6, pressureFeed_6, nm415Feed_6, nm445Feed_6, nm480Feed_6, nm515Feed_6, nm555Feed_6, nm590Feed_6, nm630Feed_6, nm680Feed_6, deviceNumberFeed},
-{tempFeed_7, humidityFeed_7, pressureFeed_7, nm415Feed_7, nm445Feed_7, nm480Feed_7, nm515Feed_7, nm555Feed_7, nm590Feed_7, nm630Feed_7, nm680Feed_7, deviceNumberFeed},
-{tempFeed_8, humidityFeed_8, pressureFeed_8, nm415Feed_8, nm445Feed_8, nm480Feed_8, nm515Feed_8, nm555Feed_8, nm590Feed_8, nm630Feed_8, nm680Feed_8, deviceNumberFeed},
-{tempFeed_9, humidityFeed_9, pressureFeed_9, nm415Feed_9, nm445Feed_9, nm480Feed_9, nm515Feed_9, nm555Feed_9, nm590Feed_9, nm630Feed_9, nm680Feed_9, deviceNumberFeed},
-{tempFeed_10, humidityFeed_10, pressureFeed_10, nm415Feed_10, nm445Feed_10, nm480Feed_10, nm515Feed_10, nm555Feed_10, nm590Feed_10, nm630Feed_10, nm680Feed_10, deviceNumberFeed},
-{tempFeed_11, humidityFeed_11, pressureFeed_11, nm415Feed_11, nm445Feed_11, nm480Feed_11, nm515Feed_11, nm555Feed_11, nm590Feed_11, nm630Feed_11, nm680Feed_11, deviceNumberFeed},
-{tempFeed_12, humidityFeed_12, pressureFeed_12, nm415Feed_12, nm445Feed_12, nm480Feed_12, nm515Feed_12, nm555Feed_12, nm590Feed_12, nm630Feed_12, nm680Feed_12, deviceNumberFeed},
-{tempFeed_13, humidityFeed_13, pressureFeed_13, nm415Feed_13, nm445Feed_13, nm480Feed_13, nm515Feed_13, nm555Feed_13, nm590Feed_13, nm630Feed_13, nm680Feed_13, deviceNumberFeed},
-{tempFeed_14, humidityFeed_14, pressureFeed_14, nm415Feed_14, nm445Feed_14, nm480Feed_14, nm515Feed_14, nm555Feed_14, nm590Feed_14, nm630Feed_14, nm680Feed_14, deviceNumberFeed}
+{tempFeed_1, humidityFeed_1, pressureFeed_1, nm415Feed_1, nm445Feed_1, nm480Feed_1, nm515Feed_1, nm555Feed_1, nm590Feed_1, nm630Feed_1, nm680Feed_1, device_01_Feed},
+{tempFeed_2, humidityFeed_2, pressureFeed_2, nm415Feed_2, nm445Feed_2, nm480Feed_2, nm515Feed_2, nm555Feed_2, nm590Feed_2, nm630Feed_2, nm680Feed_2, device_02_Feed},
+{tempFeed_3, humidityFeed_3, pressureFeed_3, nm415Feed_3, nm445Feed_3, nm480Feed_3, nm515Feed_3, nm555Feed_3, nm590Feed_3, nm630Feed_3, nm680Feed_3, device_03_Feed},
+{tempFeed_4, humidityFeed_4, pressureFeed_4, nm415Feed_4, nm445Feed_4, nm480Feed_4, nm515Feed_4, nm555Feed_4, nm590Feed_4, nm630Feed_4, nm680Feed_4, device_04_Feed},
+{tempFeed_5, humidityFeed_5, pressureFeed_5, nm415Feed_5, nm445Feed_5, nm480Feed_5, nm515Feed_5, nm555Feed_5, nm590Feed_5, nm630Feed_5, nm680Feed_5, device_05_Feed},
+{tempFeed_6, humidityFeed_6, pressureFeed_6, nm415Feed_6, nm445Feed_6, nm480Feed_6, nm515Feed_6, nm555Feed_6, nm590Feed_6, nm630Feed_6, nm680Feed_6, device_06_Feed},
+{tempFeed_7, humidityFeed_7, pressureFeed_7, nm415Feed_7, nm445Feed_7, nm480Feed_7, nm515Feed_7, nm555Feed_7, nm590Feed_7, nm630Feed_7, nm680Feed_7, device_07_Feed},
+{tempFeed_8, humidityFeed_8, pressureFeed_8, nm415Feed_8, nm445Feed_8, nm480Feed_8, nm515Feed_8, nm555Feed_8, nm590Feed_8, nm630Feed_8, nm680Feed_8, device_08_Feed},
+{tempFeed_9, humidityFeed_9, pressureFeed_9, nm415Feed_9, nm445Feed_9, nm480Feed_9, nm515Feed_9, nm555Feed_9, nm590Feed_9, nm630Feed_9, nm680Feed_9, device_09_Feed},
+{tempFeed_10, humidityFeed_10, pressureFeed_10, nm415Feed_10, nm445Feed_10, nm480Feed_10, nm515Feed_10, nm555Feed_10, nm590Feed_10, nm630Feed_10, nm680Feed_10, device_10_Feed},
+{tempFeed_11, humidityFeed_11, pressureFeed_11, nm415Feed_11, nm445Feed_11, nm480Feed_11, nm515Feed_11, nm555Feed_11, nm590Feed_11, nm630Feed_11, nm680Feed_11, device_11_Feed},
+{tempFeed_12, humidityFeed_12, pressureFeed_12, nm415Feed_12, nm445Feed_12, nm480Feed_12, nm515Feed_12, nm555Feed_12, nm590Feed_12, nm630Feed_12, nm680Feed_12, device_12_Feed},
+{tempFeed_13, humidityFeed_13, pressureFeed_13, nm415Feed_13, nm445Feed_13, nm480Feed_13, nm515Feed_13, nm555Feed_13, nm590Feed_13, nm630Feed_13, nm680Feed_13, device_13_Feed},
+{tempFeed_14, humidityFeed_14, pressureFeed_14, nm415Feed_14, nm445Feed_14, nm480Feed_14, nm515Feed_14, nm555Feed_14, nm590Feed_14, nm630Feed_14, nm680Feed_14, device_14_Feed}
 };
 
 //Functions
@@ -282,9 +308,9 @@ void setup() {
 }
 
 void loop() {
-  //MQTT_connect();
-  //pingBroker();
+  MQTT_connect();
   digitalWrite(D7, LOW);
+
   if(!BLE.connected()){
     bleConnect();
     if((millis() - lastPrint) > 5000){
@@ -294,12 +320,6 @@ void loop() {
   }
 }
   
-    
-  
-  
- 
-
-
 // Scan BLE devices then connect to the appropriate one
 void bleConnect(){
   static int deviceCount;
@@ -330,10 +350,7 @@ void bleConnect(){
 
         }
         return;
-        
       }
-        
-        
     }
     deviceCount++;
     if((deviceCount > 14 ) || (deviceCount == 0)){
@@ -342,11 +359,8 @@ void bleConnect(){
 
     }
   }
-    
-  }         
+}         
 
-      
-  
 void watchdogHandler(){
   System.reset(RESET_NO_WAIT);
 }
@@ -532,14 +546,14 @@ void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Ada
     feedName[deviceID-1][0].publish(deviceNum.tempF);
     feedName[deviceID-1][1].publish(deviceNum.humidity);
     feedName[deviceID-1][2].publish(deviceNum.pressure);
-    feedName[deviceID-1][3].publish(deviceNum.lightColorReadings[0]);
-    feedName[deviceID-1][4].publish(deviceNum.lightColorReadings[1]);
-    feedName[deviceID-1][5].publish(deviceNum.lightColorReadings[2]);
-    feedName[deviceID-1][6].publish(deviceNum.lightColorReadings[3]);
-    feedName[deviceID-1][7].publish(deviceNum.lightColorReadings[4]);
-    feedName[deviceID-1][8].publish(deviceNum.lightColorReadings[5]);
-    feedName[deviceID-1][9].publish(deviceNum.lightColorReadings[6]);
-    feedName[deviceID-1][10].publish(deviceNum.lightColorReadings[7]);
+    feedName[deviceID-1][3].publish(deviceNum.lightColorReadings[0],5);
+    feedName[deviceID-1][4].publish(deviceNum.lightColorReadings[1],5);
+    feedName[deviceID-1][5].publish(deviceNum.lightColorReadings[2],5);
+    feedName[deviceID-1][6].publish(deviceNum.lightColorReadings[3],5);
+    feedName[deviceID-1][7].publish(deviceNum.lightColorReadings[4],5);
+    feedName[deviceID-1][8].publish(deviceNum.lightColorReadings[5],5);
+    feedName[deviceID-1][9].publish(deviceNum.lightColorReadings[6],5);
+    feedName[deviceID-1][10].publish(deviceNum.lightColorReadings[7],5);
     feedName[deviceID-1][11].publish(deviceID);
   }
 }
