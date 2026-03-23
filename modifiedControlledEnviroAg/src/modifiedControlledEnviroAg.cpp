@@ -27,8 +27,8 @@
 #include "Particle.h"
 //BASE STATION//
 #include <Adafruit_MQTT.h>
-#include "Adafruit_MQTT/Adafruit_MQTT.h" 
-#include "Adafruit_MQTT/Adafruit_MQTT_SPARK.h" 
+// #include "Adafruit_MQTT/Adafruit_MQTT.h" 
+// #include "Adafruit_MQTT/Adafruit_MQTT_SPARK.h" 
 //#include <UNM_CEA_Credentials.h>
 //PERIPHERAL//
 #include "Adafruit_BME280.h"
