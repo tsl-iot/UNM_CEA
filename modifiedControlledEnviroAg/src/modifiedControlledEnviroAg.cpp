@@ -31,16 +31,17 @@
 //#include <UNM_CEA_Credentials.h>
 //PERIPHERAL//
 #include "Adafruit_BME280.h"
-#include "Adafruit_AS7341.h"
+//*#include "Adafruit_AS7341.h" -- need to replace with Lux code
 
 // Let Device OS manage the connection to the Particle Cloud
 SYSTEM_MODE(SEMI_AUTOMATIC);
 
-//BLE-UART Service
-const BleUuid serviceUuid("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
-const BleUuid txUuid("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
-BleCharacteristic txCharacteristic("tx",BleCharacteristicProperty::INDICATE,txUuid,serviceUuid);
-BleAdvertisingData data;
+//*****before deleting the bluetooth code: Do I need to replace the bluetooth lines with cellular lines for the muon? i see bluetooth associated with a sendThenDisconnect below */
+//BLE-UART Service 
+//*const BleUuid serviceUuid("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
+//*const BleUuid txUuid("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
+//*BleCharacteristic txCharacteristic("tx",BleCharacteristicProperty::INDICATE,txUuid,serviceUuid);
+//*BleAdvertisingData data;
 
 struct enviroSensors{
   float tempF;
@@ -66,15 +67,15 @@ void setup() {
   Serial.begin(9600);
   waitFor(Serial.isConnected,5000);
 
-  BLE.on();
-  BLE.addCharacteristic(txCharacteristic);
-  data.appendServiceUUID(txUuid);
-  data.appendLocalName("3"); // change this to your device number
-  BLE.advertise(&data);
-  BLE.setTxPower(8);
+  //*BLE.on();
+  //*BLE.addCharacteristic(txCharacteristic);
+  //*data.appendServiceUUID(txUuid);
+  //*data.appendLocalName("3"); // change this to your device number
+  //*BLE.advertise(&data);
+  //*BLE.setTxPower(8);
 
-  pinMode(SUBD7PIN,OUTPUT);
-  digitalWrite(SUBD7PIN, LOW);
+  //*pinMode(SUBD7PIN,OUTPUT); 
+  //*digitalWrite(SUBD7PIN, LOW); --keep? there's a digitalWrite with millis used in the loop
 
   if(!bme.begin(0x77)){
     Serial.printf("Could not start BME280\n");
@@ -83,6 +84,7 @@ void setup() {
     Serial.printf("Successfully started BME280\n");
   }
 
+  ////****Replace the following with Lux code*/
   if(!as7341.begin()){
     Serial.printf("Could not start AS7341\n");
   }
@@ -90,7 +92,7 @@ void setup() {
     Serial.printf("Successfully started AS7341\n");
   }
 
-  /* ASK FOR HELP UNDERSTANDING THE "as7341.set" LINES*/
+  /**** ASK FOR HELP UNDERSTANDING THE "as7341.set" LINES*/
   Serial.printf("Muon BLE Address: %s\n", BLE.address().toString().c_str());
   delay(5000);
   as7341.setATIME(100);
@@ -135,7 +137,7 @@ void sendThenDisconnect() {
     if(i == 4 || i == 5){
       continue;
     }
-    // we skip the first set of duplicate clear/NIR readings
+    // we skip the first set of duplicate clear/NIR readings -- what does this mean? Does it still apply?
     // (indices 4 and 5)
     counts[i] = as7341.toBasicCounts(readings[i]);
   }
