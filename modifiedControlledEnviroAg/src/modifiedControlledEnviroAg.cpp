@@ -14,6 +14,13 @@
  *  Your system firmware version is 6.3.4
  */
 
+/*To do:
+*figure out if we need to keep both "pressure" and "baroPressure" variables or if this is a remnant from multiple files (comparing to the humidity variable that's the same throughout)
+*figure out if we need to keep both "tempF" and "temperature" variables or if this is from multiple files
+*Node red (NR): Will use node red to id the device (use a device ID variable), parse out the data, and then send the data to the right feed
+*/
+
+
 /*Installed Libraries
  Adafruit_SSD1306 (a/o 3/5/2026)
  Adafruit_BME280 (a/o 3/5/2026)
