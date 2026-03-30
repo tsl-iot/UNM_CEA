@@ -61,6 +61,11 @@ struct enviroSensors{
   float luxVal;
 };
 
+// Watchdog
+ApplicationWatchdog *wd;
+unsigned int lastPrint;
+int startingDevice;
+
 //Devices device_1;
 
 enviroSensors enviroData;
