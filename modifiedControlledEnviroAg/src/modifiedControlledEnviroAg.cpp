@@ -18,6 +18,11 @@
 *figure out if we need to keep both "pressure" and "baroPressure" variables or if this is a remnant from multiple files (comparing to the humidity variable that's the same throughout)
 *figure out if we need to keep both "tempF" and "temperature" variables or if this is from multiple files
 *Node red (NR): Will use node red to id the device (use a device ID variable), parse out the data, and then send the data to the right feed
+***To do from CEA Goals doc: 
+*"Can connect and send and save data independently" -- do we need to add code for saving data independently?
+*Workshop devices only: "includes 1 BME280 and 1 light sensor, but code can manage array of x10 each sensor"-- does this mean we keep the array code from the base station code?
+*Workshop device only: "code to connect either DO or pH sensor (and 1-2 DO or pH sensors that can be used in class)"
+*Collaborator device only: "Includes networks of 10x light and BME280 sensors"-- does this use array code too? should the collaborator version of the code be a separate file from the workshop version?
 */
 
 
@@ -83,7 +88,7 @@ void MQTT_connect();
 void pingBroker();
 uint64_t millis64bit();
 void watchdogHandler();
-void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID);
+void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Adafruit_MQTT_Publish feedName[14][12]);
 
 
 /******************************************************************/
