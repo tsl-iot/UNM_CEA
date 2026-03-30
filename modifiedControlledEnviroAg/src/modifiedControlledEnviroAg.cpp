@@ -33,6 +33,7 @@
  Adafruit_MQTT (a/o 3/5/2026)
  IoTClassroom_CNM (a/o 3/5/2026)
  Adafruit_VEML7700 (a/o 3/32/2026)
+ JsonParserGeneratorRK (a/o 3/30/2026)
  */
 
 #include "Particle.h"
@@ -44,6 +45,7 @@
 //PERIPHERAL//
 #include "Adafruit_BME280.h"
 #include "Adafruit_VEML7700.h"
+#include "JsonParserGeneratorRK.h" //would we use this and the void createEventPayLoad function for the JSON aspect of this project?
 
 // Let Device OS manage the connection to the Particle Cloud
 SYSTEM_MODE(SEMI_AUTOMATIC);
@@ -84,12 +86,13 @@ void getLux(enviroSensors luxData);
 
 unsigned int lastRead;
 
+//Functions
 void MQTT_connect();
 void pingBroker();
 uint64_t millis64bit();
 void watchdogHandler();
 void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Adafruit_MQTT_Publish feedName[14][12]);
-
+void createEventPayLoad(enviroSensors bmeData, enviroSensors luxData); //in the class notes, more than one variable is included in the JSON function, in the geolocation assignment, we had the lat/long geolocation struct. is it possible to have multiple structs in the createEventPayLoad? Would I have to create another enviroSensors obect(?) to make this work?
 
 /******************************************************************/
 void setup() {
@@ -232,7 +235,7 @@ void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Ada
   incomingMessage.remove(0,newDelimiter+1);
   deviceNum.luxReading = atof(luxVal.c_str()); 
 
-  Serial.printf("Readings from device ID: %i\nTemperature: %0.1f\nHumidity %i\nBarometric pressure: %0.1f\nLux: %0.4f\n", deviceID, deviceNum.tempF ,deviceNum.humidity, deviceNum.pressure, deviceNum.luxReading;
+  Serial.printf("Readings from device ID: %i\nTemperature: %0.1f\nHumidity %i\nBarometric pressure: %0.1f\nLux: %0.4f\n", deviceID, deviceNum.tempF ,deviceNum.humidity, deviceNum.pressure, deviceNum.luxReading);
   if(mqtt.Update()){
     feedName[deviceID-1][0].publish(deviceNum.tempF);
     feedName[deviceID-1][1].publish(deviceNum.humidity);
@@ -240,4 +243,17 @@ void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Ada
     feedName[deviceID-1][3].publish(deviceNum.luxReading);
     feedName[deviceID-1][11].publish(deviceID);
   }
+}
+
+/*****************************************************************/
+void createEventPayLoad(enviroSensors bmeData, enviroSensors luxData){ 
+  JsonWriterStatic<256> jw;
+  {
+    JsonWriterAutoObject obj(&jw);
+
+    jw.insertKeyValue("EnviroData", enviroSensors.bmeData); 
+    jw.insertKeyValue("LightData", enviroSensors.luxData);
+
+  }
+  //Use pubFeed.publish(jw.getBuffer()); OR Particle.publish("env-vals", jw.getBuffer(), PRIVATE);?
 }
