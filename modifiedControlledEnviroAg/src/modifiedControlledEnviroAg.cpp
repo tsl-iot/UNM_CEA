@@ -91,7 +91,7 @@ void MQTT_connect();
 void pingBroker();
 uint64_t millis64bit();
 void watchdogHandler();
-void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Adafruit_MQTT_Publish feedName[14][12]);
+// void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Adafruit_MQTT_Publish feedName[14][12]);
 void createEventPayLoad(enviroSensors bmeData, enviroSensors luxData); //in the class notes, more than one variable is included in the JSON function, in the geolocation assignment, we had the lat/long geolocation struct. is it possible to have multiple structs in the createEventPayLoad? Would I have to create another enviroSensors obect(?) to make this work?
 
 /******************************************************************/
@@ -173,7 +173,7 @@ void MQTT_connect() {
   Serial.printf("MQTT Connected!\n");
   }
 
-/*****************************************************************/
+/*****************************************************************
 void pingBroker(){
   static uint64_t last = millis64bit();
   if ((millis()-last)>120000) {
@@ -185,8 +185,9 @@ void pingBroker(){
       last = millis();
   }
 }
+*/
 
-/*****************************************************************/
+/*****************************************************************
 uint64_t millis64bit() {
     static uint32_t low4bytes, high4bytes;
     uint32_t newMillis;
@@ -198,8 +199,8 @@ uint64_t millis64bit() {
     low4bytes = newMillis;
     return (high4bytes << 32 | low4bytes); //return 64-bit (8-byte) millis
 }
-
-/*****************************************************************/
+*/
+/*****************************************************************
 void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Adafruit_MQTT_Publish feedName[14][12]){
 
   String incomingMessage;
@@ -244,6 +245,7 @@ void parseIncomingData(const uint8_t *data, Devices deviceNum, int deviceID, Ada
     feedName[deviceID-1][11].publish(deviceID);
   }
 }
+  */
 
 /*****************************************************************/
 void createEventPayLoad(enviroSensors bmeData, enviroSensors luxData){ 
