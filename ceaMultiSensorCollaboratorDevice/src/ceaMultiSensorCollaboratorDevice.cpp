@@ -10,49 +10,72 @@
 #include "Adafruit_HDC302x.h"
 #include "Adafruit_VEML7700.h"
 #include "JsonParserGeneratorRK.h"
+#include <Adafruit_MQTT.h>
+#include "Adafruit_MQTT/Adafruit_MQTT.h" 
+#include "Adafruit_MQTT/Adafruit_MQTT_SPARK.h" 
+#include <UNM_CEA_Credentials.h>
 
 SYSTEM_MODE(SEMI_AUTOMATIC);
 
-const int MULTIPLEX_ADDR = 0x70;
-unsigned int lastDataGrab;
-
-float tempReading_0, tempReading_1, tempReading_2, tempReading_3;
-float luxReading_4, luxReading_5, luxReading_6, luxReading_7;
-double humidityReading_0, humidityReading_1, humidityReading_2, humidityReading_3;
-
-String dataTags[12] = {"Temp_0", "Temp_1", "Temp_2", "Temp_3", "Hum_0", "Hum_1", "Hum_2", "Hum_3","Lux_4", "Lux_5", "Lux_6", "Lux_7"};
-float gatheredData[12];
-//float gatheredData[12] = {tempReading_0, tempReading_1, tempReading_2, tempReading_3, (double)humidityReading_0, (double)humidityReading_1, (double)humidityReading_2, (double)humidityReading_3, luxReading_4, luxReading_5, luxReading_6, luxReading_7 };
 
 
-Adafruit_HDC302x tempHum_0 = Adafruit_HDC302x();
-Adafruit_HDC302x tempHum_1 = Adafruit_HDC302x();
-Adafruit_HDC302x tempHum_2 = Adafruit_HDC302x();
-Adafruit_HDC302x tempHum_3 = Adafruit_HDC302x();
-
+// VEML7700 LUX sensor objects
 Adafruit_VEML7700 lux_4;
 Adafruit_VEML7700 lux_5;
 Adafruit_VEML7700 lux_6;
 Adafruit_VEML7700 lux_7;
 
+// HDC302x Temp_Hum sensor objects
+Adafruit_HDC302x tempHum_0 = Adafruit_HDC302x();
+Adafruit_HDC302x tempHum_1 = Adafruit_HDC302x();
+Adafruit_HDC302x tempHum_2 = Adafruit_HDC302x();
+Adafruit_HDC302x tempHum_3 = Adafruit_HDC302x();
+
+//MQTT config and Feed(s)
+TCPClient TheClient; 
+Adafruit_MQTT_SPARK mqtt(&TheClient,AIO_SERVER,AIO_SERVERPORT,AIO_USERNAME,AIO_KEY);
+Adafruit_MQTT_Publish dataFeed = Adafruit_MQTT_Publish(&mqtt, "cea/dataobject");
+
+// Functions
 void get_HDC_T_H(float *temp_0, double *RH_0, float *temp_1, double *RH_1, float *temp_2, double *RH_2, float *temp_3, double *RH_3);
 void getLux(float *lux4, float *lux5, float *lux6, float *lux7);
 void initHDC320x();
 void initVEML7700();
 void createEventPayload();
+void MQTT_connect();
+void watchdogHandler();
 void pcaselect(uint8_t i);
+uint64_t millis64bit();
 
+// Variables
+const int MULTIPLEX_ADDR = 0x70;
+unsigned int lastDataGrab;
+float tempReading_0, tempReading_1, tempReading_2, tempReading_3;
+float luxReading_4, luxReading_5, luxReading_6, luxReading_7;
+double humidityReading_0, humidityReading_1, humidityReading_2, humidityReading_3;
+float gatheredData[12]; // Stores sensor data
+String dataTags[12] = {"Temp_0", "Temp_1", "Temp_2", "Temp_3", "Hum_0", "Hum_1", "Hum_2", "Hum_3","Lux_4", "Lux_5", "Lux_6", "Lux_7"}; // used for Key in JSON object
+
+
+// And so begins the program
 void setup() {
   Serial.begin(9600);
   waitFor(Serial.isConnected, 5000);
   Wire.begin();
   delay(1000);
+  Cellular.on();
+  Cellular.connect();
+  while(!Cellular.ready()){
+    Serial.printf(" . ");
+    delay(100);
+  }
   initHDC320x();
   initVEML7700();
   delay(2500);
 }
 
 void loop() {
+  MQTT_connect();
   if((millis() - lastDataGrab) > 30000){
     get_HDC_T_H(&tempReading_0, &humidityReading_0, &tempReading_1, &humidityReading_1, &tempReading_2, &humidityReading_2, &tempReading_3, &humidityReading_3); 
     delay(1000);
@@ -76,8 +99,8 @@ void pcaselect(uint8_t i) {
 // Measures Temperature and relative humidity from sensors 0 - 3 on the I2C multiplexer
 void get_HDC_T_H(float *temp_0, double *RH_0, float *temp_1, double *RH_1, float *temp_2, double *RH_2, float *temp_3, double *RH_3){
   double temp0, temp1, temp2, temp3;
-
-  pcaselect(0);
+              //                                                                | | | |
+  pcaselect(0); // Talking to device connected to SD0 & SC0 on the Multiplexer  V V V V  and so on...
   tempHum_0.readTemperatureHumidityOnDemand(temp0, *RH_0, TRIGGERMODE_LP0);
   pcaselect(1);
   tempHum_1.readTemperatureHumidityOnDemand(temp1, *RH_1, TRIGGERMODE_LP0);
@@ -87,7 +110,7 @@ void get_HDC_T_H(float *temp_0, double *RH_0, float *temp_1, double *RH_1, float
   tempHum_3.readTemperatureHumidityOnDemand(temp3, *RH_3, TRIGGERMODE_LP0);
 
   *temp_0 = temp0;
-  gatheredData[0] = *temp_0;
+  gatheredData[0] = *temp_0; // Fill the data buffer
 
   *temp_1 = temp1;
   gatheredData[1] = *temp_1;
@@ -217,6 +240,39 @@ void initVEML7700(){
   }
 }
 
+void watchdogHandler(){
+  System.reset(RESET_NO_WAIT);
+}
+
+void MQTT_connect() {
+  int8_t ret;
+  if (mqtt.connected()) {
+    
+    return;
+  }
+  Serial.print("Connecting to MQTT... ");
+  while ((ret = mqtt.connect()) != 0) { // connect will return 0 for connected
+    Serial.printf("%s\n",(char *)mqtt.connectErrorString(ret));
+    Serial.printf("Retrying MQTT connection in 5 seconds..\n");
+    mqtt.disconnect();
+    delay(5000);  // wait 5 seconds
+  }
+  Serial.printf("MQTT Connected!\n");
+  }
+
+uint64_t millis64bit() {
+    static uint32_t low4bytes, high4bytes;
+    uint32_t newMillis;
+
+    newMillis = millis();
+    if (newMillis < low4bytes) {    //check if millis has rolled over
+       high4bytes++;                //if so, add one to high bytes
+    }
+    low4bytes = newMillis;
+    return (high4bytes << 32 | low4bytes); //return 64-bit (8-byte) millis
+}
+
+// Creates a json object with 12+ Key:Value pairs
 void createEventPayload(){
   JsonWriterStatic<256> jw;
   {
@@ -224,8 +280,9 @@ void createEventPayload(){
       for(int i = 0; i < 12; i++){
         jw.insertKeyValue(dataTags[i], gatheredData[i]);
       }
-	    Serial.printf("%s\n", jw.getBuffer());
 	  }
+    Serial.printf("%s\n", jw.getBuffer());
+    dataFeed.publish(jw.getBuffer());
 }
 
 
