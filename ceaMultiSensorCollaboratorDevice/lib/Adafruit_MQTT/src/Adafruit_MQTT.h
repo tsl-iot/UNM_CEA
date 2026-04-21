@@ -103,7 +103,7 @@
 // Largest full packet we're able to send.
 // Need to be able to store at least ~90 chars for a connect packet with full
 // 23 char client ID.
-#define MAXBUFFERSIZE (150)
+#define MAXBUFFERSIZE (512)
 
 #define MQTT_CONN_USERNAMEFLAG    0x80
 #define MQTT_CONN_PASSWORDFLAG    0x40
