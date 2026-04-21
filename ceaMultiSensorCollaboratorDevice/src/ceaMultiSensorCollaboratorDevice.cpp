@@ -65,12 +65,6 @@ void setup() {
   waitFor(Serial.isConnected, 5000);
   Wire.begin();
   delay(1000);
-  // Cellular.on();
-  // Cellular.connect();
-  // while(!Cellular.ready()){
-  //   Serial.printf(" . ");
-  //   delay(100);
-  // }
   while(!WiFi.ready()){
     Serial.printf(" . ");
     delay(100);
@@ -104,61 +98,6 @@ void pcaselect(uint8_t i) {
 }
 
 // Measures Temperature and relative humidity from sensors 0 - 3 on the I2C multiplexer
-void get_HDC_T_H(float *temp_0, double *RH_0, float *temp_1, double *RH_1, float *temp_2, double *RH_2, float *temp_3, double *RH_3){
-  double temp0, temp1, temp2, temp3;
-              //                                                                | | | |
-  pcaselect(0); // Talking to device connected to SD0 & SC0 on the Multiplexer  V V V V  and so on...
-  tempHum_0.readTemperatureHumidityOnDemand(temp0, *RH_0, TRIGGERMODE_LP0);
-  pcaselect(1);
-  tempHum_1.readTemperatureHumidityOnDemand(temp1, *RH_1, TRIGGERMODE_LP0);
-  pcaselect(2);
-  tempHum_2.readTemperatureHumidityOnDemand(temp2, *RH_2, TRIGGERMODE_LP0);
-  pcaselect(3);
-  tempHum_3.readTemperatureHumidityOnDemand(temp3, *RH_3, TRIGGERMODE_LP0);
-
-  *temp_0 = temp0;
-  gatheredData[1] = *temp_0; // Fill the data buffer
-
-  *temp_1 = temp1;
-  gatheredData[2] = *temp_1;
-
-  *temp_2 = temp2;
-  gatheredData[3] = *temp_2;
-
-  *temp_3 = temp3;
-  gatheredData[4] = *temp_3;
-
-  gatheredData[5] = *RH_0;
-  gatheredData[6] = *RH_1;
-  gatheredData[7] = *RH_2;
-  gatheredData[8] = *RH_3;
- 
-
-  //Serial.printf("Temp_0: %0.1f\nRH_0: %0.1f\n\nTemp_1: %0.1f\nRH_1: %0.1f\n\nTemp_2: %0.1f\nRH_2: %0.1f\n\nTemp_3: %0.1f\nRH_3: %0.1f\n\n", *temp_0, *RH_0, *temp_1, *RH_1,*temp_2, *RH_2, *temp_3, *RH_3);
-  
-}
-
-// Calculates and returns the LUX values for devices 4 - 7 on the I2C multiplexer
-void getLux(float *lux4, float *lux5, float *lux6, float *lux7){
-  
-  pcaselect(4);
-  *lux4 = (lux_4.readALS() * 0.110779);  // Light level [lx] is: OUTPUT DATA [dec.] / ALS sensitivity) x (10 / IT [ms]) ---The exact integration time is 90 ms, so the factor should not be 0.1 but 0.110779
-  gatheredData[9] = *lux4;
-
-  pcaselect(5);
-  *lux5 = (lux_5.readALS() * 0.110779);
-  gatheredData[10] = *lux5;
-
-  pcaselect(6);
-  *lux6 = (lux_6.readALS() * 0.110779);
-  gatheredData[11] = *lux6;
-
-  pcaselect(7);
-  *lux7 = (lux_7.readALS() * 0.110779);
-  gatheredData[12] = *lux7;
-  //Serial.printf("Lux sensor 4: %0.4f lx\n\nLux sensor 5: %0.4f lx\n\nLux sensor 6: %0.4flx\n\nLux sensor 7: %0.4flx\n\n", *lux4, *lux5, *lux6, *lux7);
-}
-
 void initHDC320x(){
 //--------------------------
   pcaselect(0);
@@ -245,6 +184,81 @@ void initVEML7700(){
   }
 }
 
+void get_HDC_T_H(float *temp_0, double *RH_0, float *temp_1, double *RH_1, float *temp_2, double *RH_2, float *temp_3, double *RH_3){
+  double temp0, temp1, temp2, temp3;
+              //                                                                | | | |
+  pcaselect(0); // Talking to device connected to SD0 & SC0 on the Multiplexer  V V V V  and so on...
+  tempHum_0.readTemperatureHumidityOnDemand(temp0, *RH_0, TRIGGERMODE_LP0);
+  pcaselect(1);
+  tempHum_1.readTemperatureHumidityOnDemand(temp1, *RH_1, TRIGGERMODE_LP0);
+  pcaselect(2);
+  tempHum_2.readTemperatureHumidityOnDemand(temp2, *RH_2, TRIGGERMODE_LP0);
+  pcaselect(3);
+  tempHum_3.readTemperatureHumidityOnDemand(temp3, *RH_3, TRIGGERMODE_LP0);
+
+  *temp_0 = temp0;
+  gatheredData[1] = *temp_0; // Fill the data buffer
+
+  *temp_1 = temp1;
+  gatheredData[2] = *temp_1;
+
+  *temp_2 = temp2;
+  gatheredData[3] = *temp_2;
+
+  *temp_3 = temp3;
+  gatheredData[4] = *temp_3;
+
+  gatheredData[5] = *RH_0;
+  gatheredData[6] = *RH_1;
+  gatheredData[7] = *RH_2;
+  gatheredData[8] = *RH_3;
+ 
+
+  //Serial.printf("Temp_0: %0.1f\nRH_0: %0.1f\n\nTemp_1: %0.1f\nRH_1: %0.1f\n\nTemp_2: %0.1f\nRH_2: %0.1f\n\nTemp_3: %0.1f\nRH_3: %0.1f\n\n", *temp_0, *RH_0, *temp_1, *RH_1,*temp_2, *RH_2, *temp_3, *RH_3);
+  
+}
+
+// Calculates and returns the LUX values for devices 4 - 7 on the I2C multiplexer
+void getLux(float *lux4, float *lux5, float *lux6, float *lux7){
+  
+  pcaselect(4);
+  *lux4 = (lux_4.readALS() * 0.110779);  // Light level [lx] is: OUTPUT DATA [dec.] / ALS sensitivity) x (10 / IT [ms]) ---The exact integration time is 90 ms, so the factor should not be 0.1 but 0.110779
+  gatheredData[9] = *lux4;
+
+  pcaselect(5);
+  *lux5 = (lux_5.readALS() * 0.110779);
+  gatheredData[10] = *lux5;
+
+  pcaselect(6);
+  *lux6 = (lux_6.readALS() * 0.110779);
+  gatheredData[11] = *lux6;
+
+  pcaselect(7);
+  *lux7 = (lux_7.readALS() * 0.110779);
+  gatheredData[12] = *lux7;
+  //Serial.printf("Lux sensor 4: %0.4f lx\n\nLux sensor 5: %0.4f lx\n\nLux sensor 6: %0.4flx\n\nLux sensor 7: %0.4flx\n\n", *lux4, *lux5, *lux6, *lux7);
+}
+
+// Creates a json object with 12+ Key:Value pairs
+void createEventPayload(){
+
+  JsonWriterStatic<256> jw;
+  {
+	  JsonWriterAutoObject obj(&jw);
+      for(int i = 0; i < 13; i++){
+        jw.insertKeyValue(dataTags[i], gatheredData[i]);
+      }
+	  }
+    if(mqtt.Update()){
+    dataFeed.publish(jw.getBuffer());
+    Serial.printf("Published: %s\n\n\n", jw.getBuffer());
+  }
+}
+
+void assignDeviceId(){
+  gatheredData[0] = DEVICE_ID;
+}
+
 void watchdogHandler(){
   System.reset(RESET_NO_WAIT);
 }
@@ -277,33 +291,3 @@ uint64_t millis64bit() {
     return (high4bytes << 32 | low4bytes); //return 64-bit (8-byte) millis
 }
 
-// Creates a json object with 12+ Key:Value pairs
-void createEventPayload(){
-
-  JsonWriterStatic<256> jw;
-  {
-	  JsonWriterAutoObject obj(&jw);
-      for(int i = 0; i < 13; i++){
-        jw.insertKeyValue(dataTags[i], gatheredData[i]);
-      }
-	  }
-    if(mqtt.Update()){
-    dataFeed.publish(jw.getBuffer());
-    Serial.printf("Published: %s\n\n\n", jw.getBuffer());
-  }
-}
-
-      
-    
-  //   Serial.printf("Published: %s\n", jw.getBuffer());
-  //   //Serial.printf("Published: %s\n", dataArr);
-
-  //sprintf((char *)transmitBuf, "Temp_0 : %0.1f Temp_1 : %0.1f Temp_2 : %0.1f Temp_3 : %0.1f Hum_0 : %0.1f Hum_1 : %0.1f Hum_2 : %0.1f Hum_3 : %0.1f Lux_4 : %0.4f Lux_5 : %0.4f Lux_6 : %0.4f Lux_7 : %0.4f\n\n", gatheredData[0], gatheredData[1], gatheredData[2], gatheredData[3], gatheredData[4], gatheredData[5], gatheredData[6], gatheredData[7], gatheredData[8], gatheredData[9], gatheredData[10], gatheredData[11]);
-  
-
-//String dataTags[12] = {"Temp_0", "Temp_1", "Temp_2", "Temp_3", "Hum_0", "Hum_1", "Hum_2", "Hum_3","Lux_4", "Lux_5", "Lux_6", "Lux_7"}; // used for Key in JSON object
-
-
-void assignDeviceId(){
-  gatheredData[0] = DEVICE_ID;
-}
