@@ -16,20 +16,17 @@
 #include "Adafruit_MQTT/Adafruit_MQTT_SPARK.h" 
 #include <UNM_CEA_Credentials.h>
 
-// Let Device OS manage the connection to the Particle Cloud
 SYSTEM_MODE(SEMI_AUTOMATIC);
 
 
-Adafruit_VEML7700 luxSense;
-Adafruit_HDC302x tempHumSense = Adafruit_HDC302x();
 
+//Beginning of MQTT objects and feed for publishing
 TCPClient TheClient; 
 Adafruit_MQTT_SPARK mqtt(&TheClient,NODE_RED_SERVER,NODE_RED_SERVERPORT,NODE_RED_USERNAME,NODE_RED_KEY);
 Adafruit_MQTT_Publish dataFeed = Adafruit_MQTT_Publish(&mqtt, "cea/dataobject");
+//End
 
-
-
-
+//Beginning of data Structure
 struct sensorData{
   String deviceID;
   float temperature;
@@ -37,18 +34,27 @@ struct sensorData{
   float luxIntensity;
 };
 sensorData measuredReadings;
+//End
 
-bool incrementPrint;
+//Beginning of sensor objects
+Adafruit_VEML7700 luxSense;
+Adafruit_HDC302x tempHumSense = Adafruit_HDC302x();
+//End
+
+//Beginning of variables, constants, etc.
 bool readyToPublish;
-String deviceNumbers[2] = {"PAR_00","PAR_01"};
+const String deviceNumber = "PAR_XX";                 //REPLACE THE XX IN "PAR_XX" WITH A 2-DIGIT NUMBER RANGING FROM 00 - 14 BEFORE FLASHING THE PARTICLE DEVICE
+//End
 
+//Beginning of Functions
 void initHDC320x();
 void initVEML7700();
 void createEventPayload(sensorData dataBuffer);
 void grabAllSensorData();
 void MQTT_connect();
-
+void quitWifiGetCellular();
 Timer dataGrab(30000, grabAllSensorData);
+//End
 
 void setup() {
   Serial.begin(9600);
@@ -61,55 +67,20 @@ void setup() {
     Serial.printf(" . ");
     delay(100);
   }
+  
   initHDC320x();
   initVEML7700();
-
-  // Particle.disconnect();
-  // while(!Particle.disconnected()){
-  //   if(incrementPrint == 0){
-  //     Serial.printf("Turning off WiFi radio\n");
-  //     incrementPrint++;
-  //   }
-  //   else{
-  //     Serial.printf(" . ");
-  //     delay(100);
-  //   }
-  // }
-  // incrementPrint = 0;
-
-  // WiFi.disconnect();
-  // WiFi.off();
-  // delay(8000);
-
-  // Cellular.on();
-  // waitFor(Cellular.isOn, 30000);
-  // Cellular.connect();
-  // while(!Cellular.ready()){
-  //   if(incrementPrint == 0){
-  //     Serial.printf("Connecting the Cellular radio \n");
-  //     incrementPrint++;
-  //   }
-  //   else{
-  //     Serial.printf(" . ");
-  //     delay(100);
-  //   }
-  // }
-  dataGrab.start();
-
-  SystemPowerConfiguration powerConfig = System.getPowerConfiguration();
-powerConfig.auxiliaryPowerControlPin(D7).interruptPin(A7);
-System.setPowerConfiguration(powerConfig);
+  dataGrab.start();         //Start the data collection timer
 }
 
 void loop() {
-  MQTT_connect();
+  MQTT_connect();         
   if(readyToPublish){
-    createEventPayload(measuredReadings);
+    createEventPayload(measuredReadings);         
   }
 }
 
-
-// Measures Temperature and relative humidity from sensors 0 - 3 on the I2C multiplexer
+//Initializes and configures the HDC320X
 void initHDC320x(){
   if(!tempHumSense.begin(0x44)){
     Serial.printf("Temp/Hum sensor 1 FAILED TO START!\n");
@@ -119,8 +90,8 @@ void initHDC320x(){
   }
 }
 
+//Initializes and configures the VEML7700 
 void initVEML7700(){
-
   if(!luxSense.begin()){
     Serial.printf("Lux sensor 4 FAILED TO START!\n");
   }
@@ -131,28 +102,22 @@ void initVEML7700(){
   }
 }
 
-
+// Measures the temperature and relative humidity
 void get_HDC_T_H(){
   double temp0, RH_1;
-  tempHumSense.readTemperatureHumidityOnDemand(temp0, RH_1, TRIGGERMODE_LP0);
 
+  tempHumSense.readTemperatureHumidityOnDemand(temp0, RH_1, TRIGGERMODE_LP0);
   measuredReadings.temperature = temp0;
   measuredReadings.relativeHumidity = RH_1;
-  
-
   //Serial.printf("Temp_0: %0.1f\nRH_0: %0.1f\n\nTemp_1: %0.1f\nRH_1: %0.1f\n\nTemp_2: %0.1f\nRH_2: %0.1f\n\nTemp_3: %0.1f\nRH_3: %0.1f\n\n", *temp_0, *RH_0, *temp_1, *RH_1,*temp_2, *RH_2, *temp_3, *RH_3);
-  
 }
 
-// Calculates and returns the LUX values for devices 4 - 7 on the I2C multiplexer
+// Measures light intensity then converts the raw data into LUX
 void getLux(){
-  
   measuredReadings.luxIntensity = (luxSense.readALS() * 0.110779);  // Light level [lx] is: OUTPUT DATA [dec.] / ALS sensitivity) x (10 / IT [ms]) ---The exact integration time is 90 ms, so the factor should not be 0.1 but 0.110779
-  
-
- 
 }
 
+// Creates a JSON object containing sensor data then publishes using the MQTT feed in the header
 void createEventPayload(sensorData dataBuffer){
 
   JsonWriterStatic<256> jw;
@@ -171,15 +136,17 @@ void createEventPayload(sensorData dataBuffer){
   readyToPublish = false;
 }
 
+// Calls functions for getting sensor datapoints and device ID
 void grabAllSensorData(){
   static bool SwitchNum;
   SwitchNum = !SwitchNum;
   get_HDC_T_H();
   getLux();
-  measuredReadings.deviceID = deviceNumbers[SwitchNum];
+  measuredReadings.deviceID = deviceNumber;
   readyToPublish = true;
 }
- 
+
+// Connects to MQTT
 void MQTT_connect() {
   int8_t ret;
   if (mqtt.connected()) {
@@ -195,3 +162,38 @@ void MQTT_connect() {
   }
   Serial.printf("MQTT Connected!\n");
   }
+
+// Turns Wifi off and Cyellular on
+void quitWifiGetCellular(){
+  static bool incrementPrint;
+                      
+  Particle.disconnect();          // Disconnect from the particle cloud 
+  while(!Particle.disconnected()){
+    if(incrementPrint == 0){
+      Serial.printf("Turning off WiFi radio\n");
+      incrementPrint = !incrementPrint;
+    }
+    else{
+      Serial.printf(" . ");
+      delay(100);
+    }
+  }
+  incrementPrint = 0;
+  WiFi.disconnect();          //Disconnect from Wifi
+  WiFi.off();         //Turn the Wifi radio OFF
+  delay(5000);
+
+  Cellular.on();          
+  waitFor(Cellular.isOn, 30000);          //30 seconds for the Cellular radio to fully turn on
+  Cellular.connect();
+  while(!Cellular.ready()){
+    if(incrementPrint == 0){
+      Serial.printf("Connecting the Cellular radio \n");
+      incrementPrint = !incrementPrint;
+    }
+    else{
+      Serial.printf(" . ");
+      delay(100);
+    }
+  }
+}
