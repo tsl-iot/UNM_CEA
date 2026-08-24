@@ -37,6 +37,10 @@ Adafruit_VEML7700 lux_1;
 Adafruit_VEML7700 lux_2;
 Adafruit_VEML7700 lux_3;
 Adafruit_VEML7700 lux_4;
+Adafruit_VEML7700 lux_5;
+Adafruit_VEML7700 lux_6;
+Adafruit_VEML7700 lux_7;
+Adafruit_VEML7700 lux_8;
 
 // HDC302x Temp_Hum sensor objects
 Adafruit_HDC302x tempHum_1 = Adafruit_HDC302x();
@@ -51,7 +55,7 @@ Adafruit_MQTT_Publish dataFeed = Adafruit_MQTT_Publish(&mqtt, "cea/dataobject");
 
 // Functions
 void get_HDC_T_H(float *temp_1, double *RH_1, float *temp_2, double *RH_2, float *temp_3, double *RH_3, float *temp_4, double *RH_4);
-void getLux(float *lux1, float *lux2, float *lux3, float *lux4);
+void getLux(float *lux1, float *lux2, float *lux3, float *lux4, float *lux5, float *lux6, float *lux7, float *lux8);
 void initHDC320x();
 void initVEML7700();
 void assignDeviceId();
@@ -67,7 +71,7 @@ const int MULTIPLEX_ADDR = 0x70;
 const float DEVICE_ID = 1.00 ;
 unsigned int lastDataGrab;
 float tempReading_0, tempReading_1, tempReading_2, tempReading_3;
-float luxReading_4, luxReading_5, luxReading_6, luxReading_7;
+float luxReading_1, luxReading_2, luxReading_3, luxReading_4, luxReading_5, luxReading_6, luxReading_7, luxReading_8;
 double humidityReading_0, humidityReading_1, humidityReading_2, humidityReading_3;
 float gatheredData[13]; // Stores sensor data
 String dataTags[13] = {"DevId", "Temp1", "Temp2", "Temp3", "Temp4", "Hum1", "Hum2", "Hum3", "Hum4","Lux1", "Lux2", "Lux3", "Lux4"}; // used for Key in JSON object
@@ -83,7 +87,7 @@ void setup() {
     Serial.printf(" . ");
     delay(100);
   }
-  initHDC320x();
+  //initHDC320x();
   initVEML7700();
   delay(2500);
 }
@@ -92,11 +96,11 @@ void loop() {
   MQTT_connect();
   if((millis() - lastDataGrab) > 30000){
     assignDeviceId();
-    get_HDC_T_H(&tempReading_0, &humidityReading_0, &tempReading_1, &humidityReading_1, &tempReading_2, &humidityReading_2, &tempReading_3, &humidityReading_3); 
+    // get_HDC_T_H(&tempReading_0, &humidityReading_0, &tempReading_1, &humidityReading_1, &tempReading_2, &humidityReading_2, &tempReading_3, &humidityReading_3); 
+    // delay(500);
+    getLux(&luxReading_1, &luxReading_2, &luxReading_3, &luxReading_4, &luxReading_5, &luxReading_6, &luxReading_7, &luxReading_8);
     delay(500);
-    getLux(&luxReading_4, &luxReading_5, &luxReading_6, &luxReading_7);
-    delay(500);
-    createEventPayload();
+    //createEventPayload();
     lastDataGrab = millis();
   }
 }
@@ -125,7 +129,7 @@ void initHDC320x(){
     activeArea1 = true;
   }
 //-----------------------------------
-  pcaselect(2);
+  pcaselect(1);
 
   if(!tempHum_2.begin(0x44)){
     Serial.printf("Temp/Hum sensor 1 FAILED TO START!\n");
@@ -136,7 +140,7 @@ void initHDC320x(){
     activeArea2 = true;
   }
 //------------------------------------
-  pcaselect(4);
+  pcaselect(2);
 
   if(!tempHum_3.begin(0x44)){
     Serial.printf("Temp/Hum sensor 2 FAILED TO START!\n");
@@ -147,7 +151,7 @@ void initHDC320x(){
     activeArea3 = true;
   }
 //----------------------------------------
-  pcaselect(6);
+  pcaselect(3);
 
   if(!tempHum_4.begin(0x44)){
     Serial.printf("Temp/Hum sensor 3 FAILED TO START!\n");
@@ -161,7 +165,7 @@ void initHDC320x(){
 
 void initVEML7700(){
 //-------------------------
-  pcaselect(1);
+  pcaselect(0);
 
   if(!lux_1.begin()){
     Serial.printf("Lux sensor 4 FAILED TO START!\n");
@@ -175,7 +179,7 @@ void initVEML7700(){
     activeArea1 = true;
   }
 //-----------------------
-  pcaselect(3);
+  pcaselect(1);
 
   if(!lux_2.begin()){
     Serial.printf("Lux sensor 5 FAILED TO START!\n");
@@ -188,7 +192,60 @@ void initVEML7700(){
     activeArea2 = true;
   }
 //---------------------------
+  pcaselect(2);
+
+  if(!lux_3.begin()){
+    Serial.printf("Lux sensor 6 FAILED TO START!\n");
+    activeArea3 = false;
+  }
+  else{
+    Serial.printf("Lux sensor 6 successfully started\n");
+    lux_3.setGain(VEML7700_GAIN_1_8);
+    lux_3.setIntegrationTime(VEML7700_IT_100MS);
+    activeArea3 = true;
+  }
+//----------------------------
+  pcaselect(3);
+
+  if(!lux_4.begin()){
+    Serial.printf("Lux sensor 7 FAILED TO START!\n");
+    activeArea4 = false;
+  }
+  else{
+    Serial.printf("Lux sensor 7 successfully started\n");
+    lux_4.setGain(VEML7700_GAIN_1_8);
+    lux_4.setIntegrationTime(VEML7700_IT_100MS);
+    activeArea4 = true;
+  }
+
+  pcaselect(4);
+
+  if(!lux_1.begin()){
+    Serial.printf("Lux sensor 4 FAILED TO START!\n");
+    activeArea1 = false;
+    
+  }
+  else{
+    Serial.printf("Lux sensor 4 successfully started\n");
+    lux_1.setGain(VEML7700_GAIN_1_8);
+    lux_1.setIntegrationTime(VEML7700_IT_100MS);
+    activeArea1 = true;
+  }
+//-----------------------
   pcaselect(5);
+
+  if(!lux_2.begin()){
+    Serial.printf("Lux sensor 5 FAILED TO START!\n");
+    activeArea2 = false;
+  }
+  else{
+    Serial.printf("Lux sensor 5 successfully started\n");
+    lux_2.setGain(VEML7700_GAIN_1_8);
+    lux_2.setIntegrationTime(VEML7700_IT_100MS);
+    activeArea2 = true;
+  }
+//---------------------------
+  pcaselect(6);
 
   if(!lux_3.begin()){
     Serial.printf("Lux sensor 6 FAILED TO START!\n");
@@ -221,11 +278,11 @@ void get_HDC_T_H(float *temp_1, double *RH_1, float *temp_2, double *RH_2, float
               //                                                                | | | |
   pcaselect(0); // Talking to device connected to SD0 & SC0 on the Multiplexer  V V V V  and so on...
   tempHum_1.readTemperatureHumidityOnDemand(temp0, *RH_1, TRIGGERMODE_LP0);
-  pcaselect(2);
+  pcaselect(1);
   tempHum_2.readTemperatureHumidityOnDemand(temp1, *RH_2, TRIGGERMODE_LP0);
-  pcaselect(4);
+  pcaselect(2);
   tempHum_3.readTemperatureHumidityOnDemand(temp2, *RH_3, TRIGGERMODE_LP0);
-  pcaselect(6);
+  pcaselect(3);
   tempHum_4.readTemperatureHumidityOnDemand(temp3, *RH_4, TRIGGERMODE_LP0);
 
   *temp_1 = temp0;
@@ -251,24 +308,40 @@ void get_HDC_T_H(float *temp_1, double *RH_1, float *temp_2, double *RH_2, float
 }
 
 // Calculates and returns the LUX values for devices 4 - 7 on the I2C multiplexer
-void getLux(float *lux1, float *lux2, float *lux3, float *lux4){
+void getLux(float *lux1, float *lux2, float *lux3, float *lux4, float *lux5, float *lux6, float *lux7, float *lux8){
   
-  pcaselect(1);
+  pcaselect(0);
   *lux1 = (lux_1.readALS() * 0.110779);  // Light level [lx] is: OUTPUT DATA [dec.] / ALS sensitivity) x (10 / IT [ms]) ---The exact integration time is 90 ms, so the factor should not be 0.1 but 0.110779
-  gatheredData[9] = *lux1;
+  gatheredData[1] = *lux1;
+
+  pcaselect(1);
+  *lux2 = (lux_2.readALS() * 0.110779);
+  gatheredData[2] = *lux2;
+
+  pcaselect(2);
+  *lux3 = (lux_3.readALS() * 0.110779);
+  gatheredData[3] = *lux3;
 
   pcaselect(3);
-  *lux2 = (lux_2.readALS() * 0.110779);
-  gatheredData[10] = *lux2;
+  *lux4 = (lux_4.readALS() * 0.110779);
+  gatheredData[4] = *lux4;
+
+  pcaselect(4);
+  *lux1 = (lux_1.readALS() * 0.110779);  // Light level [lx] is: OUTPUT DATA [dec.] / ALS sensitivity) x (10 / IT [ms]) ---The exact integration time is 90 ms, so the factor should not be 0.1 but 0.110779
+  gatheredData[5] = *lux1;
 
   pcaselect(5);
+  *lux2 = (lux_2.readALS() * 0.110779);
+  gatheredData[6] = *lux2;
+
+  pcaselect(6);
   *lux3 = (lux_3.readALS() * 0.110779);
-  gatheredData[11] = *lux3;
+  gatheredData[7] = *lux3;
 
   pcaselect(7);
   *lux4 = (lux_4.readALS() * 0.110779);
-  gatheredData[12] = *lux4;
-  //Serial.printf("Lux sensor 4: %0.4f lx\n\nLux sensor 5: %0.4f lx\n\nLux sensor 6: %0.4flx\n\nLux sensor 7: %0.4flx\n\n", *lux4, *lux5, *lux6, *lux7);
+  gatheredData[8] = *lux4;
+  Serial.printf("Lux sensor 1: %0.4f lx\n\nLux sensor 2: %0.4f lx\n\nLux sensor 3: %0.4flx\n\nLux sensor 4: %0.4flx\n\nLux sensor 5: %0.4f lx\n\nLux sensor 6: %0.4f lx\n\nLux sensor 7: %0.4flx\n\nLux sensor 8: %0.4flx\n\n",*lux1, *lux2, *lux3, *lux4, *lux5, *lux6, *lux7, *lux8);
 }
 
 // Creates a json object with 12+ Key:Value pairs
