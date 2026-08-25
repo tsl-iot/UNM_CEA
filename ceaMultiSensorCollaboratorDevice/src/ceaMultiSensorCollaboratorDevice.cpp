@@ -168,12 +168,12 @@ void initVEML7700(){
   pcaselect(0);
 
   if(!lux_1.begin()){
-    Serial.printf("Lux sensor 4 FAILED TO START!\n");
+    Serial.printf("Lux sensor 1 FAILED TO START!\n");
     activeArea1 = false;
     
   }
   else{
-    Serial.printf("Lux sensor 4 successfully started\n");
+    Serial.printf("Lux sensor 1 successfully started\n");
     lux_1.setGain(VEML7700_GAIN_1_8);
     lux_1.setIntegrationTime(VEML7700_IT_100MS);
     activeArea1 = true;
@@ -182,11 +182,11 @@ void initVEML7700(){
   pcaselect(1);
 
   if(!lux_2.begin()){
-    Serial.printf("Lux sensor 5 FAILED TO START!\n");
+    Serial.printf("Lux sensor 2 FAILED TO START!\n");
     activeArea2 = false;
   }
   else{
-    Serial.printf("Lux sensor 5 successfully started\n");
+    Serial.printf("Lux sensor 2 successfully started\n");
     lux_2.setGain(VEML7700_GAIN_1_8);
     lux_2.setIntegrationTime(VEML7700_IT_100MS);
     activeArea2 = true;
@@ -195,11 +195,11 @@ void initVEML7700(){
   pcaselect(2);
 
   if(!lux_3.begin()){
-    Serial.printf("Lux sensor 6 FAILED TO START!\n");
+    Serial.printf("Lux sensor 3 FAILED TO START!\n");
     activeArea3 = false;
   }
   else{
-    Serial.printf("Lux sensor 6 successfully started\n");
+    Serial.printf("Lux sensor 3 successfully started\n");
     lux_3.setGain(VEML7700_GAIN_1_8);
     lux_3.setIntegrationTime(VEML7700_IT_100MS);
     activeArea3 = true;
@@ -208,11 +208,11 @@ void initVEML7700(){
   pcaselect(3);
 
   if(!lux_4.begin()){
-    Serial.printf("Lux sensor 7 FAILED TO START!\n");
+    Serial.printf("Lux sensor 4 FAILED TO START!\n");
     activeArea4 = false;
   }
   else{
-    Serial.printf("Lux sensor 7 successfully started\n");
+    Serial.printf("Lux sensor 4 successfully started\n");
     lux_4.setGain(VEML7700_GAIN_1_8);
     lux_4.setIntegrationTime(VEML7700_IT_100MS);
     activeArea4 = true;
@@ -220,54 +220,54 @@ void initVEML7700(){
 
   pcaselect(4);
 
-  if(!lux_1.begin()){
-    Serial.printf("Lux sensor 4 FAILED TO START!\n");
+  if(!lux_5.begin()){
+    Serial.printf("Lux sensor 5 FAILED TO START!\n");
     activeArea1 = false;
     
   }
   else{
-    Serial.printf("Lux sensor 4 successfully started\n");
-    lux_1.setGain(VEML7700_GAIN_1_8);
-    lux_1.setIntegrationTime(VEML7700_IT_100MS);
+    Serial.printf("Lux sensor 5 successfully started\n");
+    lux_5.setGain(VEML7700_GAIN_1_8);
+    lux_5.setIntegrationTime(VEML7700_IT_100MS);
     activeArea1 = true;
   }
 //-----------------------
   pcaselect(5);
 
-  if(!lux_2.begin()){
-    Serial.printf("Lux sensor 5 FAILED TO START!\n");
+  if(!lux_6.begin()){
+    Serial.printf("Lux sensor 6 FAILED TO START!\n");
     activeArea2 = false;
   }
   else{
-    Serial.printf("Lux sensor 5 successfully started\n");
-    lux_2.setGain(VEML7700_GAIN_1_8);
-    lux_2.setIntegrationTime(VEML7700_IT_100MS);
+    Serial.printf("Lux sensor 6 successfully started\n");
+    lux_6.setGain(VEML7700_GAIN_1_8);
+    lux_6.setIntegrationTime(VEML7700_IT_100MS);
     activeArea2 = true;
   }
 //---------------------------
   pcaselect(6);
 
-  if(!lux_3.begin()){
-    Serial.printf("Lux sensor 6 FAILED TO START!\n");
+  if(!lux_7.begin()){
+    Serial.printf("Lux sensor 7 FAILED TO START!\n");
     activeArea3 = false;
   }
   else{
-    Serial.printf("Lux sensor 6 successfully started\n");
-    lux_3.setGain(VEML7700_GAIN_1_8);
-    lux_3.setIntegrationTime(VEML7700_IT_100MS);
+    Serial.printf("Lux sensor 7 successfully started\n");
+    lux_7.setGain(VEML7700_GAIN_1_8);
+    lux_7.setIntegrationTime(VEML7700_IT_100MS);
     activeArea3 = true;
   }
 //----------------------------
   pcaselect(7);
 
-  if(!lux_4.begin()){
-    Serial.printf("Lux sensor 7 FAILED TO START!\n");
+  if(!lux_8.begin()){
+    Serial.printf("Lux sensor 8 FAILED TO START!\n");
     activeArea4 = false;
   }
   else{
-    Serial.printf("Lux sensor 7 successfully started\n");
-    lux_4.setGain(VEML7700_GAIN_1_8);
-    lux_4.setIntegrationTime(VEML7700_IT_100MS);
+    Serial.printf("Lux sensor 8 successfully started\n");
+    lux_8.setGain(VEML7700_GAIN_1_8);
+    lux_8.setIntegrationTime(VEML7700_IT_100MS);
     activeArea4 = true;
   }
 }
