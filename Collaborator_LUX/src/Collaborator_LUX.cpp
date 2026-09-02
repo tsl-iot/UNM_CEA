@@ -2,8 +2,9 @@
  * Read LUX from 8 VEML7700 sensors
  * Author: Edward Ishman @ CNM Ingenuity
  * Date: 09/01/2026
- * For comprehensive documentation and examples, please visit:
- * https://docs.particle.io/firmware/best-practices/firmware-template/
+ * 
+ * Datasheet below:
+ * https://www.vishay.com/docs/84286/veml7700.pdf
  */
 
 #include "Particle.h"
