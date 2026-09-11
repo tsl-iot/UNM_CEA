@@ -36,7 +36,7 @@ void initBME280();
 
 void pcaselect(uint8_t i);
 uint64_t millis64bit();
-void getSensorData(float *lux1, float *lux2, float *lux3, float *lux4, float *temp1, float *temp2, float *temp3, float *temp4, float *hum1, float *hum2, float *hum3, float *hum4);
+void getSensorData();
 void createEventPayload();
 
 const int MULTIPLEX_ADDR = 0x70;
@@ -72,7 +72,7 @@ void setup() {
 
 void loop() {
   if((millis() - lastDataGrab) > 30000){
-    getSensorData(&luxReading_1, &luxReading_2, &luxReading_3, &luxReading_4, &bmeTemp_1, &bmeTemp_2, &bmeTemp_3, &bmeTemp_4, &bmeHum_1, &bmeHum_2, &bmeHum_3, &bmeHum_4);
+    getSensorData();
     //Serial.printf("lux 1: %0.1f\n\nlux 2: %0.1f\n\nlux 3: %0.1f\n\nlux 4: %0.1f\n\ntemp 1: %0.1f\n\ntemp 2: %0.1f\n\ntemp 3: %0.1f\n\ntemp 4: %0.1f\n\nhum 1: %0.1f\n\nhum 2: %0.1f\n\nhum 3: %0.1f\n\nhum 4: %0.1f\n\n", luxReading_1, luxReading_2, luxReading_3, luxReading_4, bmeTemp_1, bmeTemp_2, bmeTemp_3, bmeTemp_4, bmeHum_1, bmeHum_2, bmeHum_3, bmeHum_4);
     createEventPayload();
     delay(500);
@@ -178,54 +178,56 @@ void initBME280(){
   }
 }
 
-void getSensorData(float *lux1, float *lux2, float *lux3, float *lux4, float *temp1, float *temp2, float *temp3, float *temp4, float *hum1, float *hum2, float *hum3, float *hum4){
+void getSensorData(){
+float lux1, lux2, lux3, lux4, temp1, temp2, temp3, temp4, hum1, hum2, hum3, hum4;
+
   pcaselect(0);
-  *lux1 = (lux_1.readALS() * 0.110779);  // Light level [lx] is: OUTPUT DATA [dec.] / ALS sensitivity) x (10 / IT [ms]) ---The exact integration time is 90 ms, so the factor should not be 0.1 but 0.110779
-  gatheredData[0] = *lux1;
+  lux1 = (lux_1.readALS() * 0.110779);  // Light level [lx] is: OUTPUT DATA [dec.] / ALS sensitivity) x (10 / IT [ms]) ---The exact integration time is 90 ms, so the factor should not be 0.1 but 0.110779
+  gatheredData[0] = lux1;
 
   pcaselect(1);
-  *lux2 = (lux_2.readALS() * 0.110779);
-  gatheredData[1] = *lux2;
+  lux2 = (lux_2.readALS() * 0.110779);
+  gatheredData[1] = lux2;
 
   pcaselect(2);
-  *lux3 = (lux_3.readALS() * 0.110779);
-  gatheredData[2] = *lux3;
+  lux3 = (lux_3.readALS() * 0.110779);
+  gatheredData[2] = lux3;
 
   pcaselect(3);
-  *lux4 = (lux_4.readALS() * 0.110779);
-  gatheredData[3] = *lux4;
+  lux4 = (lux_4.readALS() * 0.110779);
+  gatheredData[3] = lux4;
 
   pcaselect(4);
-  *temp1 = bme_1.readTemperature();  
-  gatheredData[4] = *temp1;
+  temp1 = bme_1.readTemperature();  
+  gatheredData[4] = temp1;
 
   pcaselect(5);
-  *temp2 = bme_2.readTemperature();  
-  gatheredData[5] = *temp2;
+  temp2 = bme_2.readTemperature();  
+  gatheredData[5] = temp2;
 
   pcaselect(6);
-  *temp3 = bme_3.readTemperature();  
-  gatheredData[6] = *temp3;
+  temp3 = bme_3.readTemperature();  
+  gatheredData[6] = temp3;
 
   pcaselect(7);
-  *temp4 = bme_4.readTemperature();  
-  gatheredData[7] = *temp4;
+  temp4 = bme_4.readTemperature();  
+  gatheredData[7] = temp4;
 
   pcaselect(4);
-  *hum1 = bme_1.readHumidity();  
-  gatheredData[8] = *hum1;
+  hum1 = bme_1.readHumidity();  
+  gatheredData[8] = hum1;
 
   pcaselect(5);
-  *hum2 = bme_2.readHumidity();  
-  gatheredData[9] = *hum2;
+  hum2 = bme_2.readHumidity();  
+  gatheredData[9] = hum2;
 
   pcaselect(6);
-  *hum3 = bme_3.readHumidity();  
-  gatheredData[10] = *hum3;
+  hum3 = bme_3.readHumidity();  
+  gatheredData[10] = hum3;
 
   pcaselect(7);
-  *hum4 = bme_4.readHumidity();  
-  gatheredData[11] = *hum4;
+  hum4 = bme_4.readHumidity();  
+  gatheredData[11] = hum4;
 }
 
 
