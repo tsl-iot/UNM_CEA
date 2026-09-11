@@ -73,7 +73,7 @@ void setup() {
 void loop() {
   if((millis() - lastDataGrab) > 30000){
     getSensorData();
-    //Serial.printf("lux 1: %0.1f\n\nlux 2: %0.1f\n\nlux 3: %0.1f\n\nlux 4: %0.1f\n\ntemp 1: %0.1f\n\ntemp 2: %0.1f\n\ntemp 3: %0.1f\n\ntemp 4: %0.1f\n\nhum 1: %0.1f\n\nhum 2: %0.1f\n\nhum 3: %0.1f\n\nhum 4: %0.1f\n\n", luxReading_1, luxReading_2, luxReading_3, luxReading_4, bmeTemp_1, bmeTemp_2, bmeTemp_3, bmeTemp_4, bmeHum_1, bmeHum_2, bmeHum_3, bmeHum_4);
+    Serial.printf("lux 1: %0.1f\n\nlux 2: %0.1f\n\nlux 3: %0.1f\n\nlux 4: %0.1f\n\ntemp 1: %0.1f\n\ntemp 2: %0.1f\n\ntemp 3: %0.1f\n\ntemp 4: %0.1f\n\nhum 1: %0.1f\n\nhum 2: %0.1f\n\nhum 3: %0.1f\n\nhum 4: %0.1f\n\n", gatheredData[0], gatheredData[1], gatheredData[2], gatheredData[3], gatheredData[4], gatheredData[5], gatheredData[6], gatheredData[7], gatheredData[8], gatheredData[9], gatheredData[10], gatheredData[11]);
     createEventPayload();
     delay(500);
     lastDataGrab = millis64bit();
