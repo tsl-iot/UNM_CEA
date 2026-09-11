@@ -33,7 +33,7 @@ Adafruit_BME280 bme_4;
 
 void initVEML7700();
 void initBME280();
-//void watchdogHandler();
+
 void pcaselect(uint8_t i);
 uint64_t millis64bit();
 void getSensorData(float *lux1, float *lux2, float *lux3, float *lux4, float *temp1, float *temp2, float *temp3, float *temp4, float *hum1, float *hum2, float *hum3, float *hum4);
