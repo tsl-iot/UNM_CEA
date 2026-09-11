@@ -33,7 +33,7 @@ float luxReading_1, luxReading_2, luxReading_3, luxReading_4, luxReading_5, luxR
 float gatheredData[8]; // Stores sensor data
 String dataTags[8] = {"LUX_1", "LUX_2", "LUX_3", "LUX_4", "LUX_5", "LUX_6", "LUX_7", "LUX_8"}; // used for Key in JSON object
 
-ApplicationWatchdog *wd;
+
 
 void setup() {
   Serial.begin(9600);
@@ -46,7 +46,7 @@ void setup() {
   }
   initVEML7700(); 
   delay(2500);
-  wd = new ApplicationWatchdog (60000, watchdogHandler, 1536) ;
+
 }
 
 void loop() {
@@ -196,7 +196,7 @@ void getLux(float *lux1, float *lux2, float *lux3, float *lux4, float *lux5, flo
   gatheredData[7] = *lux8;
   Serial.printf("Lux sensor 1: %0.4f lx\n\nLux sensor 2: %0.4f lx\n\nLux sensor 3: %0.4f lx\n\nLux sensor 4: %0.4f lx\n\nLux sensor 5: %0.4f lx\n\nLux sensor 6: %0.4f lx\n\nLux sensor 7: %0.4f lx\n\nLux sensor 8: %0.4f lx\n\n",*lux1, *lux2, *lux3, *lux4, *lux5, *lux6, *lux7, *lux8);
 
-  ApplicationWatchdog::checkin();
+
 }
 
 
